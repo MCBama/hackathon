@@ -1,0 +1,462 @@
+Map View HTML
+{% load staticfiles %}
+{% load modelTags %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: arial;
+      }
+      #map {
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index:400;
+      }
+      .main_buttons {
+        position: absolute;
+        z-index: 500;
+        top: 20px;
+        right: 20px;
+      }
+      #current_local_report {
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 2px;
+      }
+      #list_report {
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script>
+      window.onload = function() {
+        var startPos;
+        var geoSuccess = function(position) {
+          startPos = position;
+          var element = document.getElementById("current_local_report")
+          console.log(startPos)
+          element.href = "/report?lat="+startPos.coords.latitude+"&amp;lng="+startPos.coords.longitude
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+        /*window.setTimeout(function(){
+          location.reload();
+        }, 15000);*/
+      };
+
+      var map;
+      var infoWindowList = [];
+      var markerList = [];
+      var centerLatLng = {lat: parseFloat('{{ center_lat }}'), lng: parseFloat('{{ center_lon }}')}
+
+      function initMap() {
+         var styles = [
+    {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#aee2e0"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#abce83"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#769E72"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#7B8758"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#EBF4A4"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            },
+            {
+                "color": "#8dab68"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#5B5B3F"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#ABCE83"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#A4C67D"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#9BBF72"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#EBF4A4"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#87ae79"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#7f2200"
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            },
+            {
+                "visibility": "on"
+            },
+            {
+                "weight": 4.1
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#495421"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.neighborhood",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    }
+];
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: centerLatLng,
+          zoom: 12,
+          disableDoubleClickZoom: true
+        });
+        map.addListener('dblclick', function(e){
+          window.location.href = "/report?lat="+e.latLng.lat()+"&lng="+e.latLng.lng();
+        });
+        addMarkers();
+      var styledMap = new google.maps.StyledMapType(styles,
+    {name: "Styled Map"});
+
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('map_style', styledMap);
+        map.setMapTypeId('map_style');
+      }
+
+
+      function addMarkers(){
+        var person_list=[];
+        var structure_list=[];
+        var index = 0;
+        {% for person in casualty_list %}
+          person_list[index] = {}
+          person_list[index]['lat'] = parseFloat('{{person.latitude}}');
+          person_list[index]['lng'] = parseFloat('{{person.longitude}}');
+          person_list[index]['status'] = '{{person.status.capitalize}}';
+          {% if person.status.lower == "ok" %}
+            person_list[index]['url'] = "{% static 'images/green_map_marker.png' %}"
+          {% elif person.status.lower == "injured" %}
+            person_list[index]['url'] = "{% static 'images/yellow_map_marker.png' %}"
+          {% elif person.status.lower == "critical" %}
+            person_list[index]['url'] = "{% static 'images/red_map_marker.png' %}"
+          {% elif person.status.lower == "deceased" %}
+            person_list[index]['url'] = "{% static 'images/black_map_marker.png' %}"
+          {% endif %}
+          person_list[index]['view_url'] = "/report/person/{{person.id}}/"
+          person_list[index]['edit_url'] = "/report/person/{{person.id}}/edit"
+          person_list[index]['report_time'] = "{{person.report_time}}"
+          person_list[index]['last_update'] = "{{person.update_time}}"
+
+          // tooltip must be last call or won't generate tooltip correctly
+          person_list[index]['tooltip'] = generateTooltip(person_list[index]);
+          index++;
+        {% endfor %}
+        index = 0;
+        {% for structure in structure_list %}
+          structure_list[index] = {}
+          structure_list[index]['lat'] = parseFloat('{{structure.latitude}}');
+          structure_list[index]['lng'] = parseFloat('{{structure.longitude}}');
+          structure_list[index]['status'] = '{{structure.status.capitalize}}';
+          {% if structure.status.lower == "ok" %}
+            structure_list[index]['url'] = "{% static 'images/green_structure.png' %}"
+          {% elif structure.status.lower == "damaged" %}
+            structure_list[index]['url'] = "{% static 'images/yellow_structure.png' %}"
+          {% elif structure.status.lower == "unsound" %}
+            structure_list[index]['url'] = "{% static 'images/red_structure.png' %}"
+          {% elif structure.status.lower == "destroyed" %}
+            structure_list[index]['url'] = "{% static 'images/black_structure.png' %}"
+          {% endif %}
+          structure_list[index]['view_url'] = "/report/structure/{{structure.id}}/"
+          structure_list[index]['edit_url'] = "/report/structure/{{structure.id}}/edit"
+          structure_list[index]['report_time'] = "{{structure.report_time}}"
+          structure_list[index]['last_update'] = "{{structure.update_time}}"
+
+          // tooltip must be last call or won't generate tooltip correctly
+          structure_list[index]['tooltip'] = generateTooltip(structure_list[index]);
+          index++;
+        {% endfor %}
+        var object_list = person_list.concat(structure_list);
+        for(var idx in object_list){
+          var obj = object_list[idx];
+          var objLatLon = {lat: obj['lat'], lng: obj['lng']};
+          var url = obj['url'];
+          var image = {
+            url: url,
+            origin: new google.maps.Point(0, 0),
+            scaledSize: new google.maps.Size(30, 30)
+          }
+          var marker = new google.maps.Marker({
+            position: objLatLon,
+            map: map,
+            icon: image
+          });
+          var contentString = obj['tooltip'];
+
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          infoWindowList.push(infowindow);
+          addInfoWindow(marker, infowindow);
+
+          markerList.push(marker);
+        }
+         readTriageJSON();
+      }
+      function addInfoWindow(marker, infowindow){
+        marker.addListener('click', function(){
+          for (var iwindow of infoWindowList){
+            iwindow.close();
+          }
+          infowindow.open(map, marker);
+        })
+      }
+      
+      function readTriageJSON(){
+        $.getJSON('{% static "json/triage.json" %}', function(data){
+          console.log(data.features);
+          for (triage of data.features){
+              if(triage.properties.mapText == "Triage Area"){
+              if(triage.geometry.type == "Point"){
+                triageLatLon ={
+                  'lat':triage.geometry.coordinates[1],
+                  'lng':triage.geometry.coordinates[0]
+                }
+                addTriageMarker(triageLatLon, triage)
+              } else if(triage.geometry.type == "Polygon"){
+                  var coords = []
+                  for (coord of triage.geometry.coordinates[0]){
+                    coords.push({
+                      'lat':coord[1],
+                      'lng':coord[0]
+                    })
+                  }
+                  drawTriagePoly(coords);
+              } else if(triage.geometry.type == "LineString"){
+                 var coords = []
+                   for (coord of triage.geometry.coordinates){
+                     coords.push({
+                       'lat':coord[1],
+                       'lng':coord[0]
+                     })
+                   }
+                drawTriageLine(coords)
+              }
+            }
+          }
+        });
+      }
+           
+      function addTriageMarker(coord, triage){
+        var marker = new google.maps.Marker({
+             position: coord,
+             map: map
+           });
+        
+        contentString = 
+          "Feature: " + triage.properties.mapText + "<br/>" +
+          "Status: " + triage.properties.status
+          ;
+        
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          infoWindowList.push(infowindow);
+        
+        marker.addListener('click', function(){
+          for (var iwindow of infoWindowList){
+            iwindow.close();
+          }
+          infowindow.open(map, marker);
+        })
+      }
+      function drawTriagePoly(coords){
+        var triagePoly = new google.maps.Polygon({
+            paths: coords,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35
+          });
+          triagePoly.setMap(map);
+      }   
+      function drawTriageLine(coords){
+        var triageLine = new google.maps.Polyline({
+          path: coords,
+          geodesic: true,
+          strokeColor: '#000000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        })
+        triageLine.setMap(map);
+      } 
+      
+      function generateTooltip(obj){
+        var string =
+            '<div>'+
+                'Status: ' + obj['status'] + '<br/>' +
+                'Reported: ' + obj['report_time'] + '<br/>' +
+                'Last Update: ' + obj['last_update'] + '<br/>' +
+                '<a href="' + obj['view_url'] + '">View</a> ' +
+                '<a href="' + obj['edit_url'] + '">Edit</a>' +
+            '</div>'
+        return string;
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCML1Iio5WX2UfElfnG2JkPOLyBaHd0Gxs&callback=initMap"
+    async defer></script>
+    <div class="main_buttons">
+    <a id="current_local_report" href="/mobile_report" class="button">New Report at Current Location</a>
+    <a id="list_report" href="/report/list" class="button">List Reports</a>
+    </div>
+  </body>
+</html>

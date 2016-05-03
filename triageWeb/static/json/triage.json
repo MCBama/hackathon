@@ -1,0 +1,2342 @@
+{
+  "type": "FeatureCollection", 
+  "properties": {
+    "id": 182
+  }, 
+  "features": [
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "mapText": "Triage Area", 
+        "created_at": "2015-11-12T14:34:21UTC", 
+        "updated_at": "2016-01-09T20:25:54UTC", 
+        "yellow": 0, 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "green": 0, 
+        "template": 45, 
+        "casualties": 0, 
+        "id": 4463, 
+        "red": 0
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.575492322444916, 
+          34.694013301847356
+        ]
+      }, 
+      "style": {
+        "showOnMouseOver": "casualties,red,yellow,green", 
+        "schema": [
+          {
+            "text": "true", 
+            "property": "casualties"
+          }, 
+          {
+            "text": "true", 
+            "property": "red"
+          }, 
+          {
+            "text": "true", 
+            "property": "yellow"
+          }, 
+          {
+            "text": "true", 
+            "property": "green"
+          }
+        ]
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "mapText": "Triage Area", 
+        "created_at": "2015-11-12T14:38:31UTC", 
+        "updated_at": "2015-12-16T12:18:51UTC", 
+        "yellow": 0, 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "green": 0, 
+        "template": 45, 
+        "casualties": 0, 
+        "id": 4468, 
+        "red": 0
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.578960418701172, 
+          34.692028488526539
+        ]
+      }, 
+      "style": {
+        "showOnMouseOver": "casualties,red,yellow,green", 
+        "schema": [
+          {
+            "text": "true", 
+            "property": "casualties"
+          }, 
+          {
+            "text": "true", 
+            "property": "red"
+          }, 
+          {
+            "text": "true", 
+            "property": "yellow"
+          }, 
+          {
+            "text": "true", 
+            "property": "green"
+          }
+        ]
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:14:20UTC", 
+        "updated_at": "2015-12-14T14:14:20UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 58, 
+        "id": 4503
+      }, 
+      "geometry": {
+        "type": "Polygon", 
+        "coordinates": [
+          [
+            [
+              -86.590649485588074, 
+              34.698653168617206
+            ], 
+            [
+              -86.590670943260193, 
+              34.697881345700061
+            ], 
+            [
+              -86.589694619178758, 
+              34.69784165175539
+            ], 
+            [
+              -86.589673161506653, 
+              34.698639937427849
+            ], 
+            [
+              -86.590649485588074, 
+              34.698653168617206
+            ]
+          ]
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 0.5, 
+        "stroke-color": "red", 
+        "fill-color": "red"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:13:54UTC", 
+        "updated_at": "2015-12-14T14:13:54UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 58, 
+        "id": 4502
+      }, 
+      "geometry": {
+        "type": "Polygon", 
+        "coordinates": [
+          [
+            [
+              -86.590536832809448, 
+              34.700562848092886
+            ], 
+            [
+              -86.590574383735657, 
+              34.700201203168575
+            ], 
+            [
+              -86.589673161506653, 
+              34.70016592065231
+            ], 
+            [
+              -86.589662432670593, 
+              34.70064664364245
+            ], 
+            [
+              -86.590370535850525, 
+              34.700651053932191
+            ], 
+            [
+              -86.590536832809448, 
+              34.700562848092886
+            ]
+          ]
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 0.5, 
+        "stroke-color": "red", 
+        "fill-color": "red"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "mapText": "Triage Area", 
+        "created_at": "2015-12-14T14:09:00UTC", 
+        "updated_at": "2015-12-14T14:09:00UTC", 
+        "yellow": 0, 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "green": 0, 
+        "template": 45, 
+        "casualties": 0, 
+        "id": 4501, 
+        "red": 0
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.589431762695298, 
+          34.698997178798066
+        ]
+      }, 
+      "style": {
+        "showOnMouseOver": "casualties,red,yellow,green", 
+        "schema": [
+          {
+            "text": "true", 
+            "property": "casualties"
+          }, 
+          {
+            "text": "true", 
+            "property": "red"
+          }, 
+          {
+            "text": "true", 
+            "property": "yellow"
+          }, 
+          {
+            "text": "true", 
+            "property": "green"
+          }
+        ]
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:08:16UTC", 
+        "updated_at": "2015-12-14T14:08:16UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 58, 
+        "id": 4500
+      }, 
+      "geometry": {
+        "type": "Polygon", 
+        "coordinates": [
+          [
+            [
+              -86.590654850006104, 
+              34.698626706236382
+            ], 
+            [
+              -86.590692400932312, 
+              34.697846062194635
+            ], 
+            [
+              -86.589667797088623, 
+              34.697815189115033
+            ], 
+            [
+              -86.589651703834534, 
+              34.698639937427849
+            ], 
+            [
+              -86.590654850006104, 
+              34.698626706236382
+            ]
+          ]
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 0.5, 
+        "stroke-color": "red", 
+        "fill-color": "red"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:07:43UTC", 
+        "updated_at": "2015-12-14T14:07:43UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 58, 
+        "id": 4499
+      }, 
+      "geometry": {
+        "type": "Polygon", 
+        "coordinates": [
+          [
+            [
+              -86.590343713760376, 
+              34.700668695088773
+            ], 
+            [
+              -86.590590476989746, 
+              34.700470231860379
+            ], 
+            [
+              -86.590611934661865, 
+              34.700157100020903
+            ], 
+            [
+              -86.589662432670593, 
+              34.700135048438248
+            ], 
+            [
+              -86.589678525924683, 
+              34.700664284799977
+            ], 
+            [
+              -86.590343713760376, 
+              34.700668695088773
+            ]
+          ]
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 0.5, 
+        "stroke-color": "red", 
+        "fill-color": "red"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:07:10UTC", 
+        "updated_at": "2015-12-14T14:07:10UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 49, 
+        "id": 4498
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.59048318862915, 
+          34.699063334438115
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/car.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:07:07UTC", 
+        "updated_at": "2015-12-14T14:07:07UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 49, 
+        "id": 4497
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.59049391746521, 
+          34.69914713150623
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/car.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:07:05UTC", 
+        "updated_at": "2015-12-14T14:07:05UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 49, 
+        "id": 4496
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.590499281883226, 
+          34.698957485388654
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/car.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:06:56UTC", 
+        "updated_at": "2015-12-14T14:06:56UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 69, 
+        "id": 4495
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.589855551719651, 
+          34.699433805044983
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/PoliceCarCamera.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:06:54UTC", 
+        "updated_at": "2015-12-14T14:06:54UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 69, 
+        "id": 4494
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.589855551719651, 
+          34.699605808691494
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/PoliceCarCamera.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:06:53UTC", 
+        "updated_at": "2015-12-14T14:06:53UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 69, 
+        "id": 4493
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.589855551719651, 
+          34.699782222316529
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/PoliceCarCamera.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:06:50UTC", 
+        "updated_at": "2015-12-14T14:06:50UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 69, 
+        "id": 4492
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.589855551719651, 
+          34.699963045891828
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/PoliceCarCamera.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:06:37UTC", 
+        "updated_at": "2015-12-14T14:06:37UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4491
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.590772867202759, 
+          34.698441469333559
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:06:29UTC", 
+        "updated_at": "2015-12-14T14:06:29UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4490
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.590805053710938, 
+          34.698750197274563
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:01:54UTC", 
+        "updated_at": "2015-12-14T14:01:54UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4489
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.575623750686646, 
+          34.687194166286936
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:01:52UTC", 
+        "updated_at": "2015-12-14T14:01:52UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4488
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.577769517898545, 
+          34.687225043328439
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:01:49UTC", 
+        "updated_at": "2015-12-14T14:01:49UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4487
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.578354239463792, 
+          34.689060001117269
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T14:01:43UTC", 
+        "updated_at": "2015-12-14T14:01:43UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4486
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.576825380325317, 
+            34.687463237261717
+          ], 
+          [
+            -86.576852202415466, 
+            34.689183506430545
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T13:56:01UTC", 
+        "updated_at": "2015-12-14T14:01:00UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4483
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.574942469596863, 
+            34.690131844660606
+          ], 
+          [
+            -86.574953198432922, 
+            34.690233294153536
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T13:53:50UTC", 
+        "updated_at": "2015-12-14T13:54:51UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4482
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.576836109161377, 
+            34.687260331361799
+          ], 
+          [
+            -86.576846837997437, 
+            34.687264742364924
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T13:24:00UTC", 
+        "updated_at": "2015-12-14T13:24:43UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4480
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.581127643585205, 
+          34.690400906086857
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-12-14T13:24:11UTC", 
+        "updated_at": "2015-12-14T13:24:11UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4481
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.568574905395508, 
+          34.691186031150821
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "mapText": "Triage Area", 
+        "created_at": "2015-11-12T14:34:27UTC", 
+        "updated_at": "2015-12-11T14:11:37UTC", 
+        "yellow": 0, 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "green": 0, 
+        "template": 45, 
+        "casualties": 0, 
+        "id": 4464, 
+        "red": 0
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.578295230865479, 
+          34.693770716105803
+        ]
+      }, 
+      "style": {
+        "showOnMouseOver": "casualties,red,yellow,green", 
+        "schema": [
+          {
+            "text": "true", 
+            "property": "casualties"
+          }, 
+          {
+            "text": "true", 
+            "property": "red"
+          }, 
+          {
+            "text": "true", 
+            "property": "yellow"
+          }, 
+          {
+            "text": "true", 
+            "property": "green"
+          }
+        ]
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:42:25UTC", 
+        "updated_at": "2015-11-25T10:42:12UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 58, 
+        "id": 4332
+      }, 
+      "geometry": {
+        "type": "Polygon", 
+        "coordinates": [
+          [
+            [
+              -86.581712365150452, 
+              34.689964232182469
+            ], 
+            [
+              -86.581690907478333, 
+              34.689968643041496
+            ], 
+            [
+              -86.581707000732422, 
+              34.689968643041496
+            ], 
+            [
+              -86.581712365150452, 
+              34.689964232182469
+            ]
+          ]
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 0.5, 
+        "stroke-color": "red", 
+        "fill-color": "red"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "mapText": "Triage Area", 
+        "created_at": "2015-11-12T14:34:43UTC", 
+        "updated_at": "2015-11-25T10:40:55UTC", 
+        "yellow": 0, 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "green": 0, 
+        "template": 45, 
+        "casualties": 0, 
+        "id": 4465, 
+        "red": 0
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.576594710350037, 
+          34.690295045957924
+        ]
+      }, 
+      "style": {
+        "showOnMouseOver": "casualties,red,yellow,green", 
+        "schema": [
+          {
+            "text": "true", 
+            "property": "casualties"
+          }, 
+          {
+            "text": "true", 
+            "property": "red"
+          }, 
+          {
+            "text": "true", 
+            "property": "yellow"
+          }, 
+          {
+            "text": "true", 
+            "property": "green"
+          }
+        ]
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-25T10:40:47UTC", 
+        "updated_at": "2015-11-25T10:40:47UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4477
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.578477621078491, 
+            34.689443749166031
+          ], 
+          [
+            -86.578692197799683, 
+            34.690070092734466
+          ], 
+          [
+            -86.577689051628099, 
+            34.690118612108883
+          ], 
+          [
+            -86.576852202415466, 
+            34.690220061618042
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-25T10:29:44UTC", 
+        "updated_at": "2015-11-25T10:29:44UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4476
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.576288938522339, 
+            34.691838826095612
+          ], 
+          [
+            -86.575183868408203, 
+            34.692840062392037
+          ], 
+          [
+            -86.57526969909668, 
+            34.693898625039985
+          ], 
+          [
+            -86.575376987457275, 
+            34.693969195401777
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-25T10:29:28UTC", 
+        "updated_at": "2015-11-25T10:29:28UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4475
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.578434705734239, 
+            34.693828054617988
+          ], 
+          [
+            -86.578204035758972, 
+            34.693960374109857
+          ], 
+          [
+            -86.57575249671936, 
+            34.694030944419005
+          ], 
+          [
+            -86.575028300285339, 
+            34.694083872111392
+          ], 
+          [
+            -86.574336290359497, 
+            34.694101514668006
+          ], 
+          [
+            -86.572812795639038, 
+            34.694207369928662
+          ], 
+          [
+            -86.572351455688462, 
+            34.69424265498548
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-25T10:25:28UTC", 
+        "updated_at": "2015-11-25T10:28:03UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4474
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.575332731008515, 
+            34.694105925306566
+          ], 
+          [
+            -86.575332731008515, 
+            34.694105373976775
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-12T14:20:40UTC", 
+        "updated_at": "2015-11-25T10:28:03UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4458
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.575341783463955, 
+            34.694110611609794
+          ], 
+          [
+            -86.575334742665291, 
+            34.694105925306566
+          ], 
+          [
+            -86.575336754322052, 
+            34.694107027966169
+          ], 
+          [
+            -86.575339436531067, 
+            34.69410813062575
+          ], 
+          [
+            -86.575340777635574, 
+            34.69410813062575
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-12T14:23:32UTC", 
+        "updated_at": "2015-11-25T10:28:03UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4461
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.575334072113037, 
+            34.694105925306566
+          ], 
+          [
+            -86.575335077941418, 
+            34.694104271317137
+          ], 
+          [
+            -86.575336083769798, 
+            34.694102617327665
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-12T14:19:59UTC", 
+        "updated_at": "2015-11-25T10:28:03UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4457
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.575334072113037, 
+            34.694101514668006
+          ], 
+          [
+            -86.575332060456276, 
+            34.694107027966169
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-12T14:22:27UTC", 
+        "updated_at": "2015-11-25T10:27:18UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4460
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.578222811222076, 
+            34.693920678284513
+          ], 
+          [
+            -86.578220129013062, 
+            34.693916267636062
+          ], 
+          [
+            -86.578220129013062, 
+            34.693916267636062
+          ], 
+          [
+            -86.578222811222076, 
+            34.693916267636062
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-25T10:11:43UTC", 
+        "updated_at": "2015-11-25T10:21:35UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4470
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.576846837997437, 
+            34.690215650772394
+          ], 
+          [
+            -86.576299667358384, 
+            34.690250937530934
+          ], 
+          [
+            -86.575886607170105, 
+            34.690189185693619
+          ], 
+          [
+            -86.574974656105042, 
+            34.690250937530934
+          ], 
+          [
+            -86.574974656105042, 
+            34.691088993624881
+          ], 
+          [
+            -86.572421193122864, 
+            34.691216906703374
+          ], 
+          [
+            -86.572496294975281, 
+            34.692363704783446
+          ], 
+          [
+            -86.571348309516907, 
+            34.692451919362234
+          ], 
+          [
+            -86.571316123008728, 
+            34.694286761285312
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-25T10:19:13UTC", 
+        "updated_at": "2015-11-25T10:19:13UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4473
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.579062342643738, 
+            34.69204613152128
+          ], 
+          [
+            -86.579083800315857, 
+            34.692231382738939
+          ], 
+          [
+            -86.579343974590302, 
+            34.693076034821608
+          ], 
+          [
+            -86.579362750053406, 
+            34.693340675998357
+          ], 
+          [
+            -86.579225957393646, 
+            34.693603110996321
+          ], 
+          [
+            -86.578955054283142, 
+            34.693916267636062
+          ], 
+          [
+            -86.578579545021057, 
+            34.693885393090426
+          ], 
+          [
+            -86.57841324806212, 
+            34.693790564056819
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-12T14:21:10UTC", 
+        "updated_at": "2015-11-25T10:18:46UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4459
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.578220129013062, 
+            34.693920678284513
+          ], 
+          [
+            -86.578220129013062, 
+            34.693920678284513
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-25T10:16:20UTC", 
+        "updated_at": "2015-11-25T10:16:20UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4472
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.576364040374756, 
+            34.691750610863394
+          ], 
+          [
+            -86.576315760612488, 
+            34.691022831610169
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-25T10:13:24UTC", 
+        "updated_at": "2015-11-25T10:13:24UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 72, 
+        "id": 4471
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.576803922653184, 
+            34.690409727758158
+          ], 
+          [
+            -86.576782464981065, 
+            34.690987545180697
+          ], 
+          [
+            -86.574974656105042, 
+            34.691088993624881
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "blue", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "blue", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-11-12T14:35:54UTC", 
+        "updated_at": "2015-11-25T10:10:31UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4467
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.574980020523071, 
+            34.690737782992024
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738058668153
+          ], 
+          [
+            -86.574980020523071, 
+            34.690738334344282
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "mapText": "Triage Area", 
+        "created_at": "2015-11-12T14:35:27UTC", 
+        "updated_at": "2015-11-12T14:37:16UTC", 
+        "yellow": 0, 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "green": 0, 
+        "template": 45, 
+        "casualties": 0, 
+        "id": 4466, 
+        "red": 0
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.578295230865479, 
+          34.689395229396034
+        ]
+      }, 
+      "style": {
+        "showOnMouseOver": "casualties,red,yellow,green", 
+        "schema": [
+          {
+            "text": "true", 
+            "property": "casualties"
+          }, 
+          {
+            "text": "true", 
+            "property": "red"
+          }, 
+          {
+            "text": "true", 
+            "property": "yellow"
+          }, 
+          {
+            "text": "true", 
+            "property": "green"
+          }
+        ]
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "mapText": "Triage Area", 
+        "created_at": "2015-11-12T14:34:09UTC", 
+        "updated_at": "2015-11-12T14:34:09UTC", 
+        "yellow": 0, 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "green": 0, 
+        "template": 45, 
+        "casualties": 0, 
+        "id": 4462, 
+        "red": 0
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.576364040374756, 
+          34.691803540014
+        ]
+      }, 
+      "style": {
+        "showOnMouseOver": "casualties,red,yellow,green", 
+        "schema": [
+          {
+            "text": "true", 
+            "property": "casualties"
+          }, 
+          {
+            "text": "true", 
+            "property": "red"
+          }, 
+          {
+            "text": "true", 
+            "property": "yellow"
+          }, 
+          {
+            "text": "true", 
+            "property": "green"
+          }
+        ]
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-06T18:35:07UTC", 
+        "updated_at": "2015-11-12T14:25:37UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4310
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.581170558929443, 
+            34.690427371097947
+          ], 
+          [
+            -86.584088802337646, 
+            34.689421694728644
+          ], 
+          [
+            -86.586384773254395, 
+            34.688910030131986
+          ], 
+          [
+            -86.590214967727661, 
+            34.688971782923538
+          ], 
+          [
+            -86.591105461120591, 
+            34.688962961098994
+          ], 
+          [
+            -86.59150242805481, 
+            34.688954139273505
+          ], 
+          [
+            -86.592071056365953, 
+            34.688998248391535
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:39:23UTC", 
+        "updated_at": "2015-11-12T14:02:28UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4322
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.573982238769517, 
+            34.671617436363618
+          ], 
+          [
+            -86.570806503295898, 
+            34.66152253928248
+          ], 
+          [
+            -86.567373275756836, 
+            34.650932164665512
+          ], 
+          [
+            -86.566858291625977, 
+            34.649131666407051
+          ], 
+          [
+            -86.566858291625977, 
+            34.648531491630955
+          ], 
+          [
+            -86.566686630249023, 
+            34.646377887550585
+          ], 
+          [
+            -86.566686630249023, 
+            34.645248105662574
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:40:16UTC", 
+        "updated_at": "2015-11-12T14:02:28UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4324
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.566815376281738, 
+            34.644753821245729
+          ], 
+          [
+            -86.566772460937486, 
+            34.643588710604739
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "created_at": "2015-11-12T13:45:59UTC", 
+        "updated_at": "2015-11-12T13:47:27UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 41, 
+        "id": 4455
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.578407883644104, 
+          34.690760388430874
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/oh_wire_haz.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "created_at": "2015-11-12T13:46:02UTC", 
+        "updated_at": "2015-11-12T13:47:26UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 41, 
+        "id": 4456
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.577968001365662, 
+          34.690919177680797
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/oh_wire_haz.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "created_at": "2015-11-12T13:45:42UTC", 
+        "updated_at": "2015-11-12T13:47:24UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 41, 
+        "id": 4454
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.578989923000336, 
+          34.690586160986705
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/oh_wire_haz.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "created_at": "2015-11-12T13:45:39UTC", 
+        "updated_at": "2015-11-12T13:46:24UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 41, 
+        "id": 4453
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.579515635967255, 
+          34.69037444106732
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/oh_wire_haz.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "created_at": "2015-10-20T12:49:31UTC", 
+        "updated_at": "2015-10-20T12:49:31UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 70, 
+        "id": 4359
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.579700708389282, 
+          34.689377585836247
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/HFR1.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "created_at": "2015-10-20T12:49:12UTC", 
+        "updated_at": "2015-10-20T12:49:12UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 71, 
+        "id": 4358
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.579722166061401, 
+          34.690921383084891
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/BottsCam4.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "created_at": "2015-10-20T12:43:31UTC", 
+        "updated_at": "2015-10-20T12:43:31UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 69, 
+        "id": 4357
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.580424904823303, 
+          34.690303867640516
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/PoliceCarCamera.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-13T13:40:43UTC", 
+        "updated_at": "2015-10-13T13:40:43UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4336
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.574497222900391, 
+          34.671123309195046
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-13T13:40:32UTC", 
+        "updated_at": "2015-10-13T13:40:32UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4335
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.553554534912109, 
+          34.683193286488347
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-13T13:40:23UTC", 
+        "updated_at": "2015-10-13T13:40:23UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4334
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.609001159667969, 
+          34.690462657766211
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-13T13:40:19UTC", 
+        "updated_at": "2015-10-13T13:40:19UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 43, 
+        "id": 4333
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.587800979614244, 
+          34.704505557271887
+        ]
+      }, 
+      "style": {
+        "external-graphic": "/https://raw.githubusercontent.com/wiki/ngageoint/geoq/images/featuretypes/barricade.png"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:40:59UTC", 
+        "updated_at": "2015-10-07T15:40:59UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4331
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.572179794311523, 
+          34.665334742862953
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:40:56UTC", 
+        "updated_at": "2015-10-07T15:40:56UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4330
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.56951904296875, 
+          34.657992564769138
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:40:53UTC", 
+        "updated_at": "2015-10-07T15:40:53UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4329
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.566600799560547, 
+          34.646836857045209
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:38:30UTC", 
+        "updated_at": "2015-10-07T15:38:30UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4321
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.553640365600586, 
+          34.682946257804261
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "Unassigned", 
+        "created_at": "2015-10-07T15:38:08UTC", 
+        "updated_at": "2015-10-07T15:38:08UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4320
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.567759513854966, 
+          34.675958569775688
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:37:41UTC", 
+        "updated_at": "2015-10-07T15:37:41UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4319
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.567802429199219, 
+          34.67214685505899
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:37:36UTC", 
+        "updated_at": "2015-10-07T15:37:36UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4318
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.573853492736816, 
+          34.671546846948573
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:37:12UTC", 
+        "updated_at": "2015-10-07T15:37:12UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4317
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.609516143798814, 
+          34.698048942145356
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:37:04UTC", 
+        "updated_at": "2015-10-07T15:37:04UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4316
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.609816551208496, 
+          34.690780237103745
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:36:43UTC", 
+        "updated_at": "2015-10-07T15:36:43UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4315
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.568145751953125, 
+          34.691450678370572
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:36:34UTC", 
+        "updated_at": "2015-10-07T15:36:34UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4314
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.569905281066895, 
+          34.705211167728073
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:36:16UTC", 
+        "updated_at": "2015-10-07T15:36:16UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4313
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.588959693908691, 
+          34.705070046118301
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-07T15:35:54UTC", 
+        "updated_at": "2015-10-07T15:35:54UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 21, 
+        "id": 4312
+      }, 
+      "geometry": {
+        "type": "Point", 
+        "coordinates": [
+          -86.590676307678223, 
+          34.711279169214642
+        ]
+      }, 
+      "style": {
+        "stroke-width": 2, 
+        "opacity": 1, 
+        "stroke-color": "pink", 
+        "fill-color": "pink"
+      }
+    }, 
+    {
+      "type": "Feature", 
+      "properties": {
+        "status": "In work", 
+        "created_at": "2015-10-06T18:36:19UTC", 
+        "updated_at": "2015-10-06T18:36:19UTC", 
+        "analyst": "chris", 
+        "county": "Madison", 
+        "template": 42, 
+        "id": 4311
+      }, 
+      "geometry": {
+        "type": "LineString", 
+        "coordinates": [
+          [
+            -86.591706275939941, 
+            34.705387569401786
+          ], 
+          [
+            -86.591813564300537, 
+            34.701718337135745
+          ], 
+          [
+            -86.591920852661133, 
+            34.698190075730786
+          ], 
+          [
+            -86.591899394989014, 
+            34.696937506748746
+          ], 
+          [
+            -86.588165760040283, 
+            34.696919864796698
+          ], 
+          [
+            -86.588122844696031, 
+            34.698719324532298
+          ], 
+          [
+            -86.59074068069458, 
+            34.698754607665393
+          ], 
+          [
+            -86.590826511383057, 
+            34.700271768155972
+          ], 
+          [
+            -86.590461730957031, 
+            34.700836285888712
+          ], 
+          [
+            -86.59074068069458, 
+            34.701489004716066
+          ], 
+          [
+            -86.590654850006104, 
+            34.702247563370541
+          ], 
+          [
+            -86.590805053710938, 
+            34.702441612141804
+          ], 
+          [
+            -86.591598987579346, 
+            34.702494534454985
+          ]
+        ]
+      }, 
+      "style": {
+        "opacity": 1, 
+        "stroke-color": "red", 
+        "dashArray": "5, 5, 10, 5", 
+        "fill-color": "red", 
+        "stroke-width": 2
+      }
+    }
+  ]
+}

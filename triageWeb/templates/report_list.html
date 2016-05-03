@@ -1,0 +1,92 @@
+{% load staticfiles %}
+{% load modelTags %}
+{% load tz %}
+
+<!doctype html>
+<html>
+  <head>
+    <title>Report List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'javascript/jquery.tablesorter.min.js' %}"></script>
+  </head>
+  <body class="basic_page">
+<div class="input-container">
+    <input id="filterInput" placeholder="type to filter" value="Type To Filter">
+    </div>
+    <table class="report_list" cellspacing="0">
+      <thead>
+      <tr>
+        <th>Report Type</th>
+        {% for field in field_list %}
+        <th>{{field.1}}</th>
+        {% endfor %}
+        <th colspan="2">Options</th>
+      </tr>
+      </thead>
+      <tbody>
+    {% for report in report_list %}
+       <tr>
+         <td>{{ report|class_name }}</td>
+         {% for field in field_list %}
+         <td>{{ report|getattribute:field.0 }}</td>
+         {% endfor %}
+         <td>
+           <form action="/report/{{report|class_name_lower}}/{{report.id}}/delete" method="POST">{% csrf_token %}
+            <input type="submit" value="Delete"/>
+          </form>
+         </td>
+         <td>
+           <form action="/report/{{report|class_name_lower}}/{{report.id}}/edit" method="GET">{% csrf_token %}
+            <input type="submit" value="Edit"/>
+          </form>
+         </td>
+      </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+        $(".report_list").tablesorter();
+    }
+    );
+
+      $("#filterInput").keyup(function () {
+    //split the current value of searchInput
+    var data = this.value.split(" ");
+    //create a jquery object of the rows
+    var jo = $("tbody").find("tr");
+    if (this.value == "") {
+        jo.show();
+        return;
+    }
+    //hide all the rows
+    jo.hide();
+
+    //Recusively filter the jquery object to get results.
+    jo.filter(function (i, v) {
+        var $t = $(this);
+        for (var d = 0; d < data.length; ++d) {
+            if ($t.is(":contains('" + data[d] + "')")) {
+                return true;
+            }
+        }
+        return false;
+    })
+    //show the rows that match.
+    .show();
+}).focus(function () {
+    this.value = "";
+    $(this).css({
+        "color": "black"
+    });
+    $(this).unbind('focus');
+}).css({
+    "color": "#C0C0C0"
+});
+
+    </script>
+  </body>
+</html>

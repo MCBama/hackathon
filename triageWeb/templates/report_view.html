@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Send Reports</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  </head>
+  <body class="basic_page">
+    Report View<br/><br/><br/>
+  <div>
+    {{report.html_output|safe}}
+  </div>
+  <div>
+    <form action="/report/{{type}}/{{report.id}}/delete" method="POST">{% csrf_token %}
+      <input type="submit" value="Delete"/>
+    </form>
+    <form action="/map_view" method="GET">{% csrf_token %}
+      <input type="submit" value="Back To Map"/>
+    </form>
+  </div>
+  </body>
+</html>

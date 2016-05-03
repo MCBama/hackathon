@@ -1,0 +1,145 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Send Reports</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script text="text/javascript">
+      var lat;
+      var lng;
+
+      function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                  var cookie = jQuery.trim(cookies[i]);
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+      var csrftoken = getCookie('csrftoken');
+
+      function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+      $.ajaxSetup({
+          beforeSend: function(xhr, settings) {
+              if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                  xhr.setRequestHeader("X-CSRFToken", csrftoken);
+              }
+          }
+      });
+
+      function postReport(id_str){
+        var element = document.getElementById(id_str);
+        var type="";
+        if(id_str.contains("structure")){
+          type="structure";
+        } else {
+          type="person";
+        }
+        var status = "";
+        var status_regex = /(.*)_.*/g;
+        var status = status_regex.exec(id_str)[1];
+        var url = "/report_create/";
+        if(lat && lng){
+          $.ajax({
+              type:    "POST",
+              url:     url,
+              data:    {"report_type":type,
+                        "status":status,
+                        "latitude":lat.toPrecision(13),
+                        "longitude":lng.toPrecision(13)
+                       },
+              success: function(data) {
+                    element = document.getElementById("report_info");
+                    element.innerHTML = "Successfully sent report";
+                    console.log("Success");
+                    window.setTimeout(function(){
+                      element.innerHTML = "";
+                    }, 5000);
+              },
+              error:   function(jqXHR, textStatus, errorThrown) {
+                    element = document.getElementById("report_info");
+                    element.html = "Error, status = " + textStatus + ", " +
+                          "error thrown: " + errorThrown;
+              }
+            });
+        }
+      }
+
+      window.onload = function(){
+        var startPos;
+        var geoSuccess = function(position) {
+          console.log("getting position");
+          startPos = position;
+          console.log(startPos);
+          lat = startPos.coords.latitude;
+          lng = startPos.coords.longitude;
+          $('button').prop('disabled',false);
+          $('.filler').html(startPos);
+          window.setTimeout(function(){
+            navigator.geolocation.getCurrentPosition(geoSuccess)
+          }, 5000);
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+
+        var elements = document.getElementsByClassName("mobile_button");
+        console.log(elements);
+        for(var element of elements){
+          addPostListener(element);
+        }
+      }
+
+      function addPostListener(element){
+        element.addEventListener('click', function(){postReport(element.id)});
+      }
+    </script>
+  </head>
+  <body class="basic_page">
+    <div class="filler">..</div>
+    <div class="container">
+      <h1><a style="float: right" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>
+        Mobile Reports</h1>
+      <div id="report_info" class="report"></div>
+      <h2>People</h2>
+      <div>
+        <button disabled="true" id="ok_person" type="button" class="button mobile_button d_structure" href="/report_create/">
+          <img src="/static/images/green_person.png" />
+        </button>
+        <button disabled="true" id="injured_person" type="button" class="button mobile_button d_structure" href="/report_create/">
+          <img src="/static/images/yellow_person.png" />
+        </button>
+        <button disabled="true" id="critical_person" type="button" class="button mobile_button d_structure" href="/report_create/">
+          <img src="/static/images/red_person.png" />
+        </button>
+        <button disabled="true" id="deceased_person" type="button" class="button mobile_button d_structure" href="/report_create/">
+          <img src="/static/images/black_person.png" />
+        </button>
+      </div>
+      <h2>Structures</h2>
+      <div class="">
+        <button disabled="true" id="ok_structure" type="button" class="button mobile_button ok_structure" href="/report_create/">
+          <img src="/static/images/green_structure.png" />
+        </button>
+        <button disabled="true" id="damaged_structure" type="button" class="button mobile_button damaged_structure" href="/report_create/">
+          <img src="/static/images/yellow_structure.png" />
+        </button>
+        <button disabled="true" id="unsound_structure" type="button" class="button mobile_button d_structure" href="/report_create/">
+          <img src="/static/images/red_structure.png" />
+        </button>
+        <button disabled="true" id="destroyed_structure" type="button" class="button mobile_button d_structure" href="/report_create/">
+          <img src="/static/images/black_structure.png" />
+        </button>
+      </div>
+      </div>
+  </body>
+</html>
+

@@ -1,0 +1,42 @@
+Tasks:
+  Javascript:
+    Reports
+  *   Disable mobile buttons until after geo-data has loaded
+  *   Update Geodata periodically
+    report list view
+  *   Sort List view by column values
+  *   Filter list based on column values
+      Have small map that triggers popup when hovering over report in list
+        essentially on the list view there should be a map that displays the
+        valid markers for the filtered list view and if you hover your
+        cursor over a report in the list the appropriate marker's popup
+        displays.
+    Map View
+      Add ability to limit map listings based on status
+      Add ability to limit map listings based on report type (person/structure)
+   *  Add dynamic updates to map
+       Enhance dynamic updates to use JSON instead of reloading the page everytime
+  CSS:
+     Make site pretty
+  *  Make disabled buttons
+  HTML:
+    Mobile_button
+  *   Add Remaining buttons to mobile options
+  *   Change map markers to people
+  *   Make Person Buttons on top row instead of Structures
+  *   Add button to return to map view
+    Map View
+  *   Add button to swap to list view
+    Report List
+      Add map to report list view
+  DJango:
+    add ability to update report
+  * add list view for reports
+  * add mobile post option
+    add small, zoomed in map showing report location in report view
+    Triage Centers
+      add triage centers to database
+  *   add triage centers to map
+      alert centers to locations of wounded
+    Persons
+      add Patient IDs

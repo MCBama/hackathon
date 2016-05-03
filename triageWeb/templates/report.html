@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+  <head>
+      <script type="text/javascript">
+        var type_element;
+        var status_element
+        window.onload = function(){
+          type_element = document.getElementById("id_report_type");
+          status_element = document.getElementById("id_status");
+          type_element.onchange = function(){
+            console.log(type_element.value);
+            if(type_element.value == "person"){
+              var index = 0;
+              {% for status in person_statuses %}
+                status_element[index].value = "{{status.0}}";
+                status_element[index].text = "{{status.1}}";
+                index++;
+              {% endfor %}
+            } else {
+              var index = 0;
+              {% for status in structure_statuses %}
+                status_element[index].value = "{{status.0}}";
+                status_element[index].text = "{{status.1}}";
+                index++;
+              {% endfor %}
+            }
+
+          }
+        };
+      </script>
+      <title>Report</title>
+
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+      </head>
+    <body id="report_form_page" class="basic_page">
+      <div class="container">
+        <h1>Report view</h1>
+        <div>
+      <form method="POST" action="{{submit_url}}">{% csrf_token %}
+        {{ form.as_p }}
+        {% if "update" in submit_url %}
+        <input type="submit" value="Modify Report"/>
+        {% else %}
+        <input type="submit" value="Create Report"/>
+        {% endif %}
+      </form>
+      </div>
+      </div>
+    </body>
+</html>
