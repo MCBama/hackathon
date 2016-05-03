@@ -73,9 +73,6 @@
         var startPos;
         var geoSuccess = function(position) {
           startPos = position;
-          var element = document.getElementById("current_local_report")
-          console.log(startPos)
-          element.href = "/report?lat="+startPos.coords.latitude+"&amp;lng="+startPos.coords.longitude
         };
         navigator.geolocation.getCurrentPosition(geoSuccess);
         window.setTimeout(function(){
