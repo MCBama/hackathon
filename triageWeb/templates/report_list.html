@@ -11,7 +11,7 @@
     <script type="text/javascript" src="{% static 'javascript/jquery.tablesorter.min.js' %}"></script>
   </head>
   <body class="basic_page">
-<div class="input-container">
+<div class="input-container"><a style="float: right; margin-left: 20px;" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>
     <input id="filterInput" placeholder="type to filter" value="Type To Filter">
     </div>
     <table class="report_list" cellspacing="0">
@@ -33,12 +33,13 @@
          {% endfor %}
          <td>
            <form action="/report/{{report|class_name_lower}}/{{report.id}}/delete" method="POST">{% csrf_token %}
-            <input type="submit" value="Delete"/>
+            <input type="hidden" name="redirect" value="list"/>
+            <input style="width: 100%" type="submit" value="Delete"/>
           </form>
          </td>
          <td>
            <form action="/report/{{report|class_name_lower}}/{{report.id}}/edit" method="GET">{% csrf_token %}
-            <input type="submit" value="Edit"/>
+            <input style="width: 100%" type="submit" value="Edit"/>
           </form>
          </td>
       </tr>

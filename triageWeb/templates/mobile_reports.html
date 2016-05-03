@@ -84,7 +84,7 @@
           lat = startPos.coords.latitude;
           lng = startPos.coords.longitude;
           $('button').prop('disabled',false);
-          $('.filler').html(startPos);
+          $('.filler').hide();
           window.setTimeout(function(){
             navigator.geolocation.getCurrentPosition(geoSuccess)
           }, 5000);
@@ -104,10 +104,10 @@
     </script>
   </head>
   <body class="basic_page">
-    <div class="filler">..</div>
     <div class="container">
       <h1><a style="float: right" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>
         Mobile Reports</h1>
+    <div class="filler">loading location...</div>
       <div id="report_info" class="report"></div>
       <h2>People</h2>
       <div>

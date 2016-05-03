@@ -3,6 +3,7 @@ Tasks:
     Reports
   *   Disable mobile buttons until after geo-data has loaded
   *   Update Geodata periodically
+      Within report view, be able to drag the icon around in order to edit lat/lng position
     report list view
   *   Sort List view by column values
   *   Filter list based on column values
@@ -15,7 +16,7 @@ Tasks:
       Add ability to limit map listings based on status
       Add ability to limit map listings based on report type (person/structure)
    *  Add dynamic updates to map
-       Enhance dynamic updates to use JSON instead of reloading the page everytime
+         Enhance dynamic updates to use JSON instead of reloading the page everytime
   CSS:
      Make site pretty
   *  Make disabled buttons
@@ -41,3 +42,15 @@ Tasks:
     Persons
       add Patient IDs
       add ability to move patient into a triage center
+      
+   Misc:
+     Add the ability to dynamically update patient locations based on real-time reports from First Responders
+     Add more solid identification in order to track individual patients during the event
+     Add a way to inform of overlapping icons
+     
+   Theoretical:
+     Add QR downloaded "tracker" mobile app that can be registered to a particular patient
+       If Patient has a smart phone, the first responder can use it as a personal gps for that patient.
+       This way, as long as that patient has his phone the app will constantly update the central server
+       on that patient's position and can be used to change condition as well.
+     

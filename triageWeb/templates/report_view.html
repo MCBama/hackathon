@@ -3,9 +3,13 @@
   <head>
     <title>Send Reports</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <meta name="viewport" content="initial-scale=1.0">
   </head>
   <body class="basic_page">
-    Report View<br/><br/><br/>
+
+    <div class="container">
+
+      <h1><a style="float: right" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>Report View</h1>
   <div>
     {{report.html_output|safe}}
   </div>
@@ -13,18 +17,16 @@
     <table>
       <td>
         <form action="/report/{{type}}/{{report.id}}/delete" method="POST">{% csrf_token %}
-          <input type="submit" value="Delete"/>
+          <input style="max-width: 200px; min-width: 100px;" type="submit" value="Delete"/>
         </form>
       </td>
       <td>
         <form action="/report/{{type}}/{{report.id}}/edit" method="GET">{% csrf_token %}
-          <input type="submit" value="Edit"/>
+          <input style="max-width: 200px; min-width: 100px;" type="submit" value="Edit"/>
         </form>
       </td>
     </table>
-    <form action="/map_view" method="GET">{% csrf_token %}
-      <input type="submit" value="Back To Map"/>
-    </form>
+      </div>
   </div>
   </body>
 </html>

@@ -9,7 +9,6 @@ a.button{
 }
 
 .mobile_button{
-  width:20%;
   height:200px;
   display:inline-block;
 }
@@ -27,6 +26,7 @@ a.button{
 .basic_page .container {
   margin: 40px;
   border: solid 1px #000;
+  max-width: 700px;
 }
 .basic_page .container div {
   padding: 20px;
@@ -35,6 +35,7 @@ a.button{
   background-color: #fc0;
   padding: 20px;
   margin: 0;
+  font-size: 2em;
 }
 .basic_page .container h2 {
   margin-left: 15px;
@@ -42,12 +43,14 @@ a.button{
 }
 .basic_page label {
   display: inline-block;
-  width: 100px;
+  width: 25%;
+  font-size: 1em;
 }
 .basic_page input,
 .basic_page select {
   display: inline-block;
-  width: 120px;
+  font-size: 1em;
+  width: 60%;
 }
 .basic_page button {
     -webkit-box-shadow:rgba(0,0,0,0.98) 0 1px 0 0;
@@ -63,7 +66,10 @@ a.button{
     font-size:11px;
     font-weight:700;
     padding: 8px;
-  display: inline-block;
+    display: inline-block;
+    width:24%;
+    height: 150px;
+
 }
 .basic_page button[disabled], .basic_page button[disabled]:hover {
     background-color: #fff;
@@ -75,9 +81,7 @@ a.button{
     background-color: #fc0;
 }
 .basic_page button img {
-  width: 80%;
-  max-width: 200px;
-  max-height:180px;
+  height: 80%;
 }
 
 /*report list*/
@@ -98,6 +102,10 @@ a.button{
   margin: 10px auto;
   text-align: right;
   max-width: 550px;
+}
+
+body {
+  font-size: 16px;
 }
 
 /*Google's Popup InfoWindow*/

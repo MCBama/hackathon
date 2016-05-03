@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 import triageWeb.views as views
 
 urlpatterns = [
     url(r'^$', views.map_view),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'admin/login.html'}),
+    url(r'^accounts/login/$', auth_views.login, {'template_name': 'admin/login.html'}),
     url(r'^login_mobile/',views.login_mobile),
     url(r'^map_view/', views.map_view),
     url(r'^report/$', views.report),

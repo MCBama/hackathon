@@ -36,14 +36,14 @@
       </head>
     <body id="report_form_page" class="basic_page">
       <div class="container">
-        <h1>Report view</h1>
+        <h1><a style="float: right" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>Report view</h1>
         <div>
       <form method="POST" action="{{submit_url}}">{% csrf_token %}
         {{ form.as_p }}
         {% if "update" in submit_url %}
-        <input type="submit" value="Modify Report"/>
+        <label>&nbsp;</label><input type="submit" value="Modify Report"/>
         {% else %}
-        <input type="submit" value="Create Report"/>
+        <label>&nbsp;</label><input type="submit" value="Create Report"/>
         {% endif %}
       </form>
       </div>

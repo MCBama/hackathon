@@ -125,8 +125,8 @@ class Person(models.Model):
           "Last Updated: %s<br/>"
           "Name: %s %s<br/>"
           "Status: %s<br/>"
-          "Latitude: %s<br/>"
-          "Longitude: %s<br/>"
+          "Latitude: %.13f<br/>"
+          "Longitude: %.13f<br/>"
         "</div>" % (self.initial_reporter,
                     self.report_time.strftime("%Y-%m-%d %H:%M:%S"),
                     self.updater,

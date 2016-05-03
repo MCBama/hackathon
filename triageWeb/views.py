@@ -178,7 +178,8 @@ def report_update(request, id, report_type):
           person_report.longitude = TriageCoord.objects.get(geoObj=person_report.triage.geometry).lng
         
         person_report.save()
-        person_report.triage.update_counts()
+        if person_report.triage is not None:
+          person_report.triage.update_counts()
       else:
         structure_report = Structure.objects.get(pk=id)
         structure_report.status=form.cleaned_data['status']
@@ -221,7 +222,12 @@ def report_personnel_delete(request, id):
     report = Person.objects.get(pk=id)
     report.is_active = False
     report.save()
-    return redirect('/map_view/')
+    if report.triage is not None:
+      report.triage.update_counts()
+    if 'redirect' in request.POST:
+      return redirect('/report/list')
+    else:
+      return redirect('/map_view/')
   return HttpResponse("Delete Get")
 
 def report_structure_view(request, id):
@@ -233,7 +239,10 @@ def report_structure_delete(request, id):
     report = Structure.objects.get(pk=id)
     report.is_active = False
     report.save()
-    return redirect('/map_view/')
+    if 'redirect' in request.POST:
+      return redirect('/report/list')
+    else:
+      return redirect('/map_view/')
   return HttpResponse("Delete Get")
 
 def mobile_post_report(request, state, lat, lon):
