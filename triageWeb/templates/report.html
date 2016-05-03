@@ -8,24 +8,25 @@
         window.onload = function(){
           type_element = document.getElementById("id_report_type");
           status_element = document.getElementById("id_status");
-          type_element.onchange = function(){
-            console.log(type_element.value);
-            if(type_element.value == "person"){
-              var index = 0;
-              {% for status in person_statuses %}
-                status_element[index].value = "{{status.0}}";
-                status_element[index].text = "{{status.1}}";
-                index++;
-              {% endfor %}
-            } else {
-              var index = 0;
-              {% for status in structure_statuses %}
-                status_element[index].value = "{{status.0}}";
-                status_element[index].text = "{{status.1}}";
-                index++;
-              {% endfor %}
+          if(type_element && status_element){
+            type_element.onchange = function(){
+              console.log(type_element.value);
+              if(type_element.value == "person"){
+                var index = 0;
+                {% for status in person_statuses %}
+                  status_element[index].value = "{{status.0}}";
+                  status_element[index].text = "{{status.1}}";
+                  index++;
+                {% endfor %}
+              } else {
+                var index = 0;
+                {% for status in structure_statuses %}
+                  status_element[index].value = "{{status.0}}";
+                  status_element[index].text = "{{status.1}}";
+                  index++;
+                {% endfor %}
+              }
             }
-
           }
         };
       </script>

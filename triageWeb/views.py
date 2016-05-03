@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseNotFound
 from django.contrib.auth import authenticate, login
-from django.utils import timezone
+from django.utils import timezone, dateparse
 from django.contrib.auth.models import User
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from urllib.request import urlopen, urlretrieve
 
@@ -11,12 +12,20 @@ from itertools import chain
 
 import codecs
 import json
-import datetime 
+import datetime
+import re
+
+from django.utils import six
+from django.utils.timezone import get_fixed_timezone, utc
 
 from .models import Person
 from .models import Reporter
 from .models import Structure
 from .models import TriageArea
+from .models import TriageProperties
+from .models import TriageCoord
+from .models import TriageGeometry
+
 
 from .forms import ReportForm
 from .forms import StructureForm
@@ -27,11 +36,16 @@ from .forms import UpdateStructureForm
 def map_view(request):
   casualty_list = Person.objects.all().filter(is_active=True)
   structure_list = Structure.objects.all().filter(is_active=True)
+  triage_list = TriageArea.objects.filter(properties__mapText="Triage Area")
+  for triage in triage_list:
+    coord = TriageCoord.objects.get(geoObj=triage.geometry)
+    triage.geometry.coordinates = {'lat':coord.lat, 'lng':coord.lng}
   context = {
     'center_lat':34.738228,
     'center_lon':-86.601791,
     'casualty_list':casualty_list,
-    'structure_list':structure_list
+    'structure_list':structure_list,
+    'triage_list':triage_list
   }
   return render(request, 'map_view.html', context)
 
@@ -58,12 +72,19 @@ def report(request):
         'longitude':request.GET['lng'],
         'report_type':'person'
       })  
+  casualty_list = Person.objects.all().filter(is_active=True)
+  structure_list = Structure.objects.all().filter(is_active=True)
   context = {
     'form':form,
     'person_statuses':Person.STATUS,
     'structure_statuses':Structure.STATUS,
-    'submit_url':"/report_create/"
+    'submit_url':"/report_create/",
+    'center_lat':34.738228,
+    'center_lon':-86.601791,
+    'casualty_list':casualty_list,
+    'structure_list':structure_list
   }
+    
   return render(request,'report.html',context)
 
 @login_required
@@ -107,8 +128,12 @@ def report_person_edit(request, id):
   form = UpdatePersonForm(initial={
       'status':report.status,
       'latitude':report.latitude,
-      'longitude':report.longitude
+      'longitude':report.longitude,
+      'triage':report.triage
     })
+  queryset = TriageArea.objects.filter(
+    properties__mapText__isnull=False).filter(properties__mapText="Triage Area")
+  form.fields['triage'].queryset = queryset
   context = {
     'form':form,
     'person_statuses':Person.STATUS,
@@ -138,7 +163,6 @@ def report_update(request, id, report_type):
       form = UpdatePersonForm(request.POST)
     else:
       form = UpdateStructureForm  (request.POST)
-    print(request.POST)
     if form.is_valid():
       reporter = Reporter.objects.get(user=request.user)
       if report_type == 'person':
@@ -148,8 +172,13 @@ def report_update(request, id, report_type):
         person_report.longitude=form.cleaned_data['longitude']
         person_report.updater=reporter
         person_report.update_time = datetime.datetime.now()
+        if form.cleaned_data['triage']:
+          person_report.triage = form.cleaned_data['triage']
+          person_report.latitude = TriageCoord.objects.get(geoObj=person_report.triage.geometry).lat
+          person_report.longitude = TriageCoord.objects.get(geoObj=person_report.triage.geometry).lng
         
         person_report.save()
+        person_report.triage.update_counts()
       else:
         structure_report = Structure.objects.get(pk=id)
         structure_report.status=form.cleaned_data['status']
@@ -216,3 +245,37 @@ def mobile_post_report(request, state, lat, lon):
   person = Person(status=state,latitude=lat,longitude=lon,initial_reporter=reporter)
   person.save()
   return redirect('/map_view/')
+
+def parse_json(request):
+  response = urlopen("https://geo-q.com/geoq/api/jobs/182.geojson")
+  data = json.loads(response.read().decode("utf-8"))
+  
+  for feature in data['features']:
+    if TriageProperties.objects.filter(pk=feature['properties']['id']).count()==0:
+      properties = TriageProperties(
+        status = feature['properties']['status'],
+        created_at = dateparse.parse_time(feature['properties']['created_at']),
+        updated_at = dateparse.parse_time(feature['properties']['updated_at']),
+        id = feature['properties']['id']
+      )
+      if 'mapText' in feature['properties']:
+        properties.mapText = feature['properties']['mapText']
+      geometry = TriageGeometry(
+        geo_type = feature['geometry']['type']
+      )
+      geometry.save()
+      coords = feature['geometry']['coordinates']
+      if geometry.geo_type == "Point":
+        coord = TriageCoord(
+          lat = coords[1],
+          lng = coords[0],
+          geoObj = geometry
+        )
+        coord.save()
+      area = TriageArea(
+        properties = properties,
+        geometry = geometry
+      )
+      properties.save()
+      area.save()
+  return HttpResponse("parsed")

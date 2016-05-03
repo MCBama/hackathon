@@ -24,14 +24,19 @@ class ReportForm(forms.ModelForm):
     ]
   
 class UpdatePersonForm(forms.ModelForm):
+  def __init__(self, *args, **kwargs):
+    super(UpdatePersonForm, self).__init__(*args, **kwargs)
+    self.fields['triage'].required = False
   class Meta:
     model = Person
     fields=[
       'status',
       'latitude',
-      'longitude'
+      'longitude',
+      'triage'
     ]
     
+        
 class UpdateStructureForm(forms.ModelForm):
   class Meta:
     model = Structure

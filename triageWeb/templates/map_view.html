@@ -267,9 +267,9 @@ Map View HTML
       var styledMap = new google.maps.StyledMapType(styles,
     {name: "Styled Map"});
 
-        //Associate the styled map with the MapTypeId and set it to display.
-        map.mapTypes.set('map_style', styledMap);
-        map.setMapTypeId('map_style');
+          //Associate the styled map with the MapTypeId and set it to display.
+          map.mapTypes.set('map_style', styledMap);
+          map.setMapTypeId('map_style');
       }
 
 
@@ -283,13 +283,13 @@ Map View HTML
           person_list[index]['lng'] = parseFloat('{{person.longitude}}');
           person_list[index]['status'] = '{{person.status.capitalize}}';
           {% if person.status.lower == "ok" %}
-            person_list[index]['url'] = "{% static 'images/green_map_marker.png' %}"
+            person_list[index]['url'] = "{% static 'images/green_person.png' %}"
           {% elif person.status.lower == "injured" %}
-            person_list[index]['url'] = "{% static 'images/yellow_map_marker.png' %}"
+            person_list[index]['url'] = "{% static 'images/yellow_person.png' %}"
           {% elif person.status.lower == "critical" %}
-            person_list[index]['url'] = "{% static 'images/red_map_marker.png' %}"
+            person_list[index]['url'] = "{% static 'images/red_person.png' %}"
           {% elif person.status.lower == "deceased" %}
-            person_list[index]['url'] = "{% static 'images/black_map_marker.png' %}"
+            person_list[index]['url'] = "{% static 'images/black_person.png' %}"
           {% endif %}
           person_list[index]['view_url'] = "/report/person/{{person.id}}/"
           person_list[index]['edit_url'] = "/report/person/{{person.id}}/edit"
@@ -329,10 +329,15 @@ Map View HTML
           var obj = object_list[idx];
           var objLatLon = {lat: obj['lat'], lng: obj['lng']};
           var url = obj['url'];
+          var width = 30;
+          if(url.includes("person")){
+            console.log(url)
+            width = 20;
+          }
           var image = {
             url: url,
             origin: new google.maps.Point(0, 0),
-            scaledSize: new google.maps.Size(30, 30)
+            scaledSize: new google.maps.Size(width, 30)
           }
           var marker = new google.maps.Marker({
             position: objLatLon,
@@ -361,38 +366,24 @@ Map View HTML
       }
       
       function readTriageJSON(){
-        $.getJSON('{% static "json/triage.json" %}', function(data){
-          console.log(data.features);
-          for (triage of data.features){
-              if(triage.properties.mapText == "Triage Area"){
-              if(triage.geometry.type == "Point"){
-                triageLatLon ={
-                  'lat':triage.geometry.coordinates[1],
-                  'lng':triage.geometry.coordinates[0]
-                }
-                addTriageMarker(triageLatLon, triage)
-              } else if(triage.geometry.type == "Polygon"){
-                  var coords = []
-                  for (coord of triage.geometry.coordinates[0]){
-                    coords.push({
-                      'lat':coord[1],
-                      'lng':coord[0]
-                    })
-                  }
-                  drawTriagePoly(coords);
-              } else if(triage.geometry.type == "LineString"){
-                 var coords = []
-                   for (coord of triage.geometry.coordinates){
-                     coords.push({
-                       'lat':coord[1],
-                       'lng':coord[0]
-                     })
-                   }
-                drawTriageLine(coords)
-              }
+        {% for triage in triage_list %}
+          if("{{triage.geometry.geo_type}}" == "Point"){
+            "{{triage.geometry.coordinates.lat}}"
+            triageLatLon ={
+              'lat':parseFloat("{{triage.geometry.coordinates.lat}}"),
+              'lng':parseFloat("{{triage.geometry.coordinates.lng}}")
             }
+            var triage = {'properties':{
+              'mapText':"{{triage.properties.mapText}}",
+              'status':"{{triage.properties.status}}",
+              'id':"{{triage.properties.id}}",
+              'green':"{{triage.properties.green}}",
+              'yellow':"{{triage.properties.yellow}}",
+              'red':"{{triage.properties.red}}"
+            }}
+            addTriageMarker(triageLatLon, triage)
           }
-        });
+        {% endfor %}
       }
            
       function addTriageMarker(coord, triage){
@@ -402,8 +393,12 @@ Map View HTML
            });
         
         contentString = 
-          "Feature: " + triage.properties.mapText + "<br/>" +
-          "Status: " + triage.properties.status
+          "Feature: " + triage.properties.mapText+" <br/>" +
+          "Status: " + triage.properties.status+" <br/>" +
+          "Id: " + triage.properties.id + "<br/>" +
+          "Green: " + triage.properties.green + "<br/>" +
+          "Yellow: " + triage.properties.yellow + "<br/>" +
+          "Red: " + triage.properties.red + "<br/>"
           ;
         
         var infowindow = new google.maps.InfoWindow({
@@ -455,7 +450,7 @@ Map View HTML
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCML1Iio5WX2UfElfnG2JkPOLyBaHd0Gxs&callback=initMap"
     async defer></script>
     <div class="main_buttons">
-    <a id="current_local_report" href="/mobile_report" class="button">New Report at Current Location</a>
+    <a id="current_local_report" href="/mobile_report/" class="button">New Report at Current Location</a>
     <a id="list_report" href="/report/list" class="button">List Reports</a>
     </div>
   </body>

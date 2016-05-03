@@ -40,3 +40,4 @@ Tasks:
       alert centers to locations of wounded
     Persons
       add Patient IDs
+      add ability to move patient into a triage center

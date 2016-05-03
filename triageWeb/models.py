@@ -3,6 +3,42 @@ from django.conf import settings
 
 # Create your models here.
 
+class TriageProperties(models.Model):
+  status=models.CharField(max_length=20, default="")
+  mapText=models.CharField(max_length=20, default="")
+  created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+  green = models.IntegerField(default=0)
+  yellow = models.IntegerField(default=0)
+  red = models.IntegerField(default=0)
+  casualties = models.IntegerField(default=0)
+
+  def __str__(self):
+    return str(self.id)  
+  
+class TriageGeometry(models.Model):
+  geo_type = models.CharField(max_length=20, default="")
+  
+class TriageCoord(models.Model):
+  lat=models.DecimalField(decimal_places=13, max_digits=50, default=0.0)
+  lng=models.DecimalField(decimal_places=13, max_digits=50, default=0.0)
+  geoObj = models.ForeignKey(TriageGeometry)
+  
+class TriageArea(models.Model):
+  properties=models.ForeignKey(TriageProperties)
+  geometry = models.ForeignKey(TriageGeometry)
+  
+  def update_counts(self):
+    queryset = Person.objects.all().filter(is_active=True, triage=self)
+    self.properties.green = queryset.filter(status="ok").count()
+    self.properties.yellow = queryset.filter(status="injured").count()
+    self.properties.red = queryset.filter(status="critical").count()
+    self.properties.casualties = queryset.filter(status="deceased").count()
+    self.properties.save()
+    
+  def __str__(self):
+    return self.properties.__str__()
+    
 class Reporter(models.Model):
   user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
@@ -68,8 +104,8 @@ class Person(models.Model):
         (OK, 'Ok'),
     )
     status = models.CharField(choices=STATUS, default=OK, max_length=20)
-    latitude = models.DecimalField(decimal_places=13, max_digits=50, default=0.0)
-    longitude = models.DecimalField(decimal_places=13, max_digits=50, default=0.0)
+    latitude = models.DecimalField(decimal_places=30, max_digits=50, default=0.0)
+    longitude = models.DecimalField(decimal_places=30, max_digits=50, default=0.0)
     initial_reporter = models.ForeignKey(Reporter, related_name='reporter')
     updater = models.ForeignKey(Reporter, default=None, null=True)
     report_time = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -77,6 +113,7 @@ class Person(models.Model):
     is_active = models.BooleanField(default=True)
     first_name = models.CharField(max_length=30, default="")
     last_name = models.CharField(max_length=30, default="")
+    triage = models.ForeignKey(TriageArea, null=True)
     
     def html_output(self):
       string = (
@@ -102,6 +139,3 @@ class Person(models.Model):
       )
       return string
 
-class TriageArea():
-  geometry=""
-  points = []

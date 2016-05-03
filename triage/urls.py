@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^report/structure/(?P<id>\d+)/$', views.report_structure_view),
     url(r'^report/structure/(?P<id>\d+)/edit/', views.report_structure_edit),
     url(r'^report/structure/(?P<id>\d+)/delete$', views.report_structure_delete),
-    url(r'^(?P<state>\w+)/(?P<lat>-?\d+\.\d+)/(?P<lon>-?\d+\.\d+)', views.mobile_post_report)
+    url(r'^(?P<state>\w+)/(?P<lat>-?\d+\.\d+)/(?P<lon>-?\d+\.\d+)', views.mobile_post_report),
+    url(r'^parse_json/', views.parse_json)
 ]
