@@ -33,6 +33,7 @@ from .forms import UpdatePersonForm
 from .forms import UpdateStructureForm
 
 # Create your views here.
+@login_required
 def map_view(request):
   casualty_list = Person.objects.all().filter(is_active=True)
   structure_list = Structure.objects.all().filter(is_active=True)

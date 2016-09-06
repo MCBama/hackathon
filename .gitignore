@@ -1,0 +1,8 @@
+db.sqlite3
+
+triage/__pycache__/*
+triageWeb/__pycache__/*
+
+triageWeb/migrations/__pycache__/*
+triageWeb/models/__pycache__/*
+triageWeb/templatetags/__pycache__/*
