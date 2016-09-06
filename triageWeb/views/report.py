@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+
 from django.http import HttpResponse, HttpResponseNotFound
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone, dateparse
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
@@ -18,50 +19,19 @@ import re
 from django.utils import six
 from django.utils.timezone import get_fixed_timezone, utc
 
-from .models import Person
-from .models import Reporter
-from .models import Structure
-from .models import TriageArea
-from .models import TriageProperties
-from .models import TriageCoord
-from .models import TriageGeometry
+from triageWeb.models import Person
+from triageWeb.models import Reporter
+from triageWeb.models import Structure
+from triageWeb.models import TriageArea
+from triageWeb.models import TriageProperties
+from triageWeb.models import TriageCoord
+from triageWeb.models import TriageGeometry
 
 
-from .forms import ReportForm
-from .forms import StructureForm
-from .forms import UpdatePersonForm
-from .forms import UpdateStructureForm
-
-# Create your views here.
-@login_required
-def map_view(request):
-  casualty_list = Person.objects.all().filter(is_active=True)
-  structure_list = Structure.objects.all().filter(is_active=True)
-  triage_list = TriageArea.objects.filter(properties__mapText="Triage Area")
-  for triage in triage_list:
-    coord = TriageCoord.objects.get(geoObj=triage.geometry)
-    triage.geometry.coordinates = {'lat':coord.lat, 'lng':coord.lng}
-  context = {
-    'center_lat':34.738228,
-    'center_lon':-86.601791,
-    'casualty_list':casualty_list,
-    'structure_list':structure_list,
-    'triage_list':triage_list
-  }
-  return render(request, 'map_view.html', context)
-
-def login_mobile(request):
-  username = request.POST['username']
-  password = request.POST['password']
-  user = authenticate(username=username, password=password)
-  if user is not None:
-    if user.is_active:
-      login(request, user)
-      return redirect('/map_view/')
-    else:
-      return HttpResponseNotFound('User not active')
-  else:
-    return HttpResponseNotFound("User doesn't exist")
+from triageWeb.forms import ReportForm
+from triageWeb.forms import StructureForm
+from triageWeb.forms import UpdatePersonForm
+from triageWeb.forms import UpdateStructureForm
 
 @login_required
 def report(request):
@@ -72,7 +42,7 @@ def report(request):
         'latitude':request.GET['lat'],
         'longitude':request.GET['lng'],
         'report_type':'person'
-      })  
+      })
   casualty_list = Person.objects.all().filter(is_active=True)
   structure_list = Structure.objects.all().filter(is_active=True)
   context = {
@@ -85,7 +55,7 @@ def report(request):
     'casualty_list':casualty_list,
     'structure_list':structure_list
   }
-    
+
   return render(request,'report.html',context)
 
 @login_required
@@ -142,7 +112,7 @@ def report_person_edit(request, id):
     'submit_url':"/report/person/" + str(report.id) + "/update/"
   }
   return render(request,'report.html',context)
-  
+
 def report_structure_edit(request, id):
   report = Structure.objects.get(pk=id)
   form = UpdateStructureForm(initial={
@@ -156,8 +126,8 @@ def report_structure_edit(request, id):
     'structure_statuses':Structure.STATUS,
     'submit_url':"/report/structure/" + str(report.id) + "/update/"
   }
-  return render(request,'report.html',context)  
-  
+  return render(request,'report.html',context)
+
 def report_update(request, id, report_type):
   if request.method == "POST":
     if(report_type == "person"):
@@ -177,7 +147,7 @@ def report_update(request, id, report_type):
           person_report.triage = form.cleaned_data['triage']
           person_report.latitude = TriageCoord.objects.get(geoObj=person_report.triage.geometry).lat
           person_report.longitude = TriageCoord.objects.get(geoObj=person_report.triage.geometry).lng
-        
+
         person_report.save()
         if person_report.triage is not None:
           person_report.triage.update_counts()
@@ -188,7 +158,7 @@ def report_update(request, id, report_type):
         structure_report.longitude=format(form.cleaned_data['longitude'], '.13f')
         structure_report.updater=reporter
         structure_report.update_time = datetime.datetime.now()
-        
+
         structure_report.save()
     else:
       print("form invalid")
@@ -207,7 +177,7 @@ def report_list(request):
     ('updater','Updater'),
     ('update_time','Updated'),
   ]
-  
+
   context = {
     'report_list':report_list,
     'field_list':field_list
@@ -251,41 +221,7 @@ def mobile_post_report(request, state, lat, lon):
   reporter = Reporter.objects.get(user = user)
   if not state or state == 'dead':
     state = 'deceased'
-  
+
   person = Person(status=state,latitude=lat,longitude=lon,initial_reporter=reporter)
   person.save()
   return redirect('/map_view/')
-
-def parse_json(request):
-  response = urlopen("https://geo-q.com/geoq/api/jobs/182.geojson")
-  data = json.loads(response.read().decode("utf-8"))
-  
-  for feature in data['features']:
-    if TriageProperties.objects.filter(pk=feature['properties']['id']).count()==0:
-      properties = TriageProperties(
-        status = feature['properties']['status'],
-        created_at = dateparse.parse_time(feature['properties']['created_at']),
-        updated_at = dateparse.parse_time(feature['properties']['updated_at']),
-        id = feature['properties']['id']
-      )
-      if 'mapText' in feature['properties']:
-        properties.mapText = feature['properties']['mapText']
-      geometry = TriageGeometry(
-        geo_type = feature['geometry']['type']
-      )
-      geometry.save()
-      coords = feature['geometry']['coordinates']
-      if geometry.geo_type == "Point":
-        coord = TriageCoord(
-          lat = coords[1],
-          lng = coords[0],
-          geoObj = geometry
-        )
-        coord.save()
-      area = TriageArea(
-        properties = properties,
-        geometry = geometry
-      )
-      properties.save()
-      area.save()
-  return HttpResponse("parsed")
