@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+import datetime
+
 from .Reporter import *
 
 class Structure(models.Model):
@@ -22,6 +24,20 @@ class Structure(models.Model):
   report_time = models.DateTimeField(auto_now=False, auto_now_add=True)
   update_time = models.DateTimeField(auto_now=False, auto_now_add=True)
   is_active = models.BooleanField(default=True)
+
+  def condition_type(self):
+    return "Damage"
+
+  condition_type = property(condition_type)
+
+  def update(self, form_data, reporter):
+    self.status=form_data['status']
+    self.latitude=format(form_data['latitude'],'.13f')
+    self.longitude=format(form_data['longitude'], '.13f')
+    self.updater=reporter
+    self.update_time = datetime.datetime.now()
+
+    self.save()
 
   def html_output(self):
     string = (
