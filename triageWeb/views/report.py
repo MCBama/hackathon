@@ -20,38 +20,53 @@ from django.utils import six
 from django.utils.timezone import get_fixed_timezone, utc
 
 from triageWeb.models import Person
+from triageWeb.models import Condition
+from triageWeb.models import Injury
+from triageWeb.models import Disease
 from triageWeb.models import Reporter
 from triageWeb.models import Structure
+from triageWeb.models import HealthCenter
 from triageWeb.models import TriageArea
 from triageWeb.models import TriageProperties
 from triageWeb.models import TriageCoord
 from triageWeb.models import TriageGeometry
 
 
-from triageWeb.forms import ReportForm
+from triageWeb.forms import InjuryReportForm
+from triageWeb.forms import DiseaseReportForm
 from triageWeb.forms import StructureForm
-from triageWeb.forms import UpdatePersonForm
-from triageWeb.forms import UpdateStructureForm
+from triageWeb.forms import InjuryReportForm
+from triageWeb.forms import DiseaseReportForm
+from triageWeb.forms import StructureForm
 
 @login_required
 def report(request):
-  form = ReportForm(initial={'report_type':'person'});
-
+  injury_form = InjuryReportForm()
+  disease_form = DiseaseReportForm()
+  structure_form = StructureForm()
   if request.GET and request.GET['lng'] and request.GET['lat']:
-    form = ReportForm(initial={
+    injury_form = InjuryReportForm(initial={
         'latitude':request.GET['lat'],
-        'longitude':request.GET['lng'],
-        'report_type':'person'
+        'longitude':request.GET['lng']
+      })
+    disease_form = DiseaseReportForm(initial={
+        'latitude':request.GET['lat'],
+        'longitude':request.GET['lng']
+      })
+    structure_form = StructureForm(initial = {
+      'latitude':request.GET['lat'],
+      'longitude':request.GET['lng']
       })
   casualty_list = Person.objects.all().filter(is_active=True)
   structure_list = Structure.objects.all().filter(is_active=True)
   context = {
-    'form':form,
-    'person_statuses':Person.STATUS,
-    'structure_statuses':Structure.STATUS,
+    'new_report':True,
+    'injury_form':injury_form,
+    'disease_form':disease_form,
+    'structure_form':structure_form,
+    'disease_statuses':Disease.STATUS,
+    'injury_statuses':Injury.STATUS,
     'submit_url':"/report_create/",
-    'center_lat':34.738228,
-    'center_lon':-86.601791,
     'casualty_list':casualty_list,
     'structure_list':structure_list
   }
@@ -64,21 +79,46 @@ def mobile_report(request):
 
 def report_create(request):
   if request.method == "POST":
-    if(request.POST['report_type'] == "person"):
-      form = ReportForm(request.POST)
+    print(request.POST['report_type'])
+    if request.POST['report_type'] == "disease":
+      print("handling disease")
+      form = DiseaseReportForm(request.POST)
+    elif request.POST['report_type'] == "injury":
+      form = InjuryReportForm(request.POST)
     else:
       form = StructureForm(request.POST)
     print(request.POST)
     if form.is_valid():
       reporter = Reporter.objects.get(user=request.user)
-      if form.cleaned_data['report_type'] == 'person':
+      report_type = request.POST['report_type']
+      if(report_type == 'injury' or
+      report_type == 'disease'):
         person_report = Person(
-          status=form.cleaned_data['status'],
           latitude=form.cleaned_data['latitude'],
           longitude=form.cleaned_data['longitude'],
           initial_reporter=reporter
         )
         person_report.save()
+        condition = Condition(
+          person = person_report
+        )
+        if(report_type == "injury"):
+          condition.condition_type = Condition.INJURY
+          condition.save()
+          injury = Injury(
+            condition = condition,
+            status = form.cleaned_data['status']
+          )
+          injury.save()
+        else:
+          condition.condition_type = Condition.DISEASE
+          condition.save()
+          disease = Disease(
+            condition = condition,
+            status = form.cleaned_data['status'],
+            disease_name = form.cleaned_data['disease_name']
+          )
+          disease.save()
       else:
         structure_report = Structure(
           status=form.cleaned_data['status'],
@@ -90,24 +130,32 @@ def report_create(request):
         print(form.cleaned_data)
         print("structure made")
     else:
-      print("form invalid")
+      print("form invalid here")
       return render(request, 'report.html', {'form':form})
   return redirect('/map_view/')
 
 def report_person_edit(request, id):
   report = Person.objects.get(pk=id)
-  form = UpdatePersonForm(initial={
+  injury_form = InjuryReportForm(initial={
       'status':report.status,
       'latitude':report.latitude,
       'longitude':report.longitude,
-      'triage':report.triage
+      'center':report.center
     })
-  queryset = TriageArea.objects.filter(
-    properties__mapText__isnull=False).filter(properties__mapText="Triage Area")
-  form.fields['triage'].queryset = queryset
+  disease_form = DiseaseReportForm(initial={
+      'status':report.status,
+      'latitude':report.latitude,
+      'longitude':report.longitude,
+      'center':report.center
+    })
+  queryset = HealthCenter.objects.all()
+  injury_form.fields['center'].queryset = queryset
+  disease_form.fields['center'].queryset = queryset
   context = {
-    'form':form,
-    'person_statuses':Person.STATUS,
+    'current_condition':report.condition.condition_type.lower,
+    'is_structure':False,
+    'injury_form':injury_form,
+    'disease_form':disease_form,
     'structure_statuses':Structure.STATUS,
     'submit_url':"/report/person/" + str(report.id) + "/update/"
   }
@@ -115,14 +163,14 @@ def report_person_edit(request, id):
 
 def report_structure_edit(request, id):
   report = Structure.objects.get(pk=id)
-  form = UpdateStructureForm(initial={
+  structure_form = StructureForm(initial={
       'status':report.status,
       'latitude':report.latitude,
       'longitude':report.longitude,
     })
   context = {
-    'form':form,
-    'person_statuses':Person.STATUS,
+    'is_structure':True,
+    'structure_form':structure_form,
     'structure_statuses':Structure.STATUS,
     'submit_url':"/report/structure/" + str(report.id) + "/update/"
   }
@@ -130,36 +178,22 @@ def report_structure_edit(request, id):
 
 def report_update(request, id, report_type):
   if request.method == "POST":
-    if(report_type == "person"):
-      form = UpdatePersonForm(request.POST)
+    if request.POST['report_type'] == "injury":
+      form = InjuryReportForm(request.POST)
+    elif request.POST['report_type'] == "disease":
+      form = DiseaseReportForm(request.POST)
     else:
-      form = UpdateStructureForm  (request.POST)
+      form = StructureForm  (request.POST)
     if form.is_valid():
       reporter = Reporter.objects.get(user=request.user)
       if report_type == 'person':
         person_report = Person.objects.get(pk=id)
-        person_report.status=form.cleaned_data['status']
-        person_report.latitude=form.cleaned_data['latitude']
-        person_report.longitude=form.cleaned_data['longitude']
-        person_report.updater=reporter
-        person_report.update_time = datetime.datetime.now()
-        if form.cleaned_data['triage']:
-          person_report.triage = form.cleaned_data['triage']
-          person_report.latitude = TriageCoord.objects.get(geoObj=person_report.triage.geometry).lat
-          person_report.longitude = TriageCoord.objects.get(geoObj=person_report.triage.geometry).lng
+        person_report.update(form.cleaned_data, reporter)
 
-        person_report.save()
-        if person_report.triage is not None:
-          person_report.triage.update_counts()
       else:
         structure_report = Structure.objects.get(pk=id)
-        structure_report.status=form.cleaned_data['status']
-        structure_report.latitude=format(form.cleaned_data['latitude'],'.13f')
-        structure_report.longitude=format(form.cleaned_data['longitude'], '.13f')
-        structure_report.updater=reporter
-        structure_report.update_time = datetime.datetime.now()
+        structure_report.update(form.cleaned_data, reporter)
 
-        structure_report.save()
     else:
       print("form invalid")
       return render(request, 'report.html', {'form':form})
@@ -171,6 +205,7 @@ def report_list(request):
   report_list = list(chain(person_list, structure_list))
   print(timezone.localtime(timezone.now()))
   field_list = [
+    ('condition_type', "Condition"),
     ('status','Status'),
     ('initial_reporter','Reporter'),
     ('report_time','Reported'),
@@ -193,8 +228,8 @@ def report_personnel_delete(request, id):
     report = Person.objects.get(pk=id)
     report.is_active = False
     report.save()
-    if report.triage is not None:
-      report.triage.update_counts()
+    if report.center is not None:
+      report.update_center_count()
     if 'redirect' in request.POST:
       return redirect('/report/list')
     else:
