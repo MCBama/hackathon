@@ -2,51 +2,82 @@
 <!doctype html>
 <html>
   <head>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'javascript/bootstrap.min.js' %}"></script>
       <script type="text/javascript">
         var type_element;
         var status_element
         window.onload = function(){
-          type_element = document.getElementById("id_report_type");
-          status_element = document.getElementById("id_status");
-          if(type_element && status_element){
-            type_element.onchange = function(){
-              console.log(type_element.value);
-              if(type_element.value == "person"){
-                var index = 0;
-                {% for status in person_statuses %}
-                  status_element[index].value = "{{status.0}}";
-                  status_element[index].text = "{{status.1}}";
-                  index++;
-                {% endfor %}
-              } else {
-                var index = 0;
-                {% for status in structure_statuses %}
-                  status_element[index].value = "{{status.0}}";
-                  status_element[index].text = "{{status.1}}";
-                  index++;
-                {% endfor %}
-              }
-            }
-          }
+          // set active tab
+
         };
       </script>
       <title>Report</title>
-
-      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-      </head>
-    <body id="report_form_page" class="basic_page">
-      <div class="container">
-        <h1><a style="float: right" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>Report view</h1>
-        <div>
-      <form method="POST" action="{{submit_url}}">{% csrf_token %}
-        {{ form.as_p }}
-        {% if "update" in submit_url %}
-        <label>&nbsp;</label><input type="submit" value="Modify Report"/>
-        {% else %}
-        <label>&nbsp;</label><input type="submit" value="Create Report"/>
-        {% endif %}
-      </form>
-      </div>
+    </head>
+    <body id="report_form_page">
+      <h1><a style="float: right;margin-right:15px" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>Report view</h1>
+      <div class="row">
+        <div class="col-md-offset-1 col-md-5">
+          <ul class="nav nav-tabs" role="tablist">
+            <li id="injury_tab" role="presentation" class="
+            {% if current_condition == 'disease' or is_structure%}
+              hidden
+            {% else %}
+              active
+            {% endif %}">
+            <a href=#injury_tab_pane aria-controls="injury_tab_pane" role="tab" data-toggle="tab">Injury</a></li>
+            <li id="disease_tab" role="presentation" class="
+            {% if current_condition == 'disease'%}
+              active
+            {% elif is_structure or current_condition == 'injury'%}
+              hidden
+            {% endif %}">
+            <a href=#disease_tab_pane aria-controls="disease_tab_pane" role="tab" data-toggle="tab">Disease</a></li>
+            <li id="structure_tab" role="presentation" class="
+            {% if current_condition == 'injury' or current_condition == 'disease' %}
+              hidden
+            {% elif is_structure %}
+              active
+            {% endif %}">
+            <a href=#structure_tab_pane aria-controls="structure_tab_pane" role="tab" data-toggle="tab">Structure</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="injury_tab_pane" role="tabpanel" class="tab-pane {% if not is_structure and current_condition != 'disease' %} active {% endif %}">
+              <form method="POST" action="{{submit_url}}">{% csrf_token %}
+                {{ injury_form.as_p }}
+                <input type="hidden" name="report_type" value="injury"/>
+                {% if "update" in submit_url %}
+                <label>&nbsp;</label><input type="submit" value="Modify Report"/>
+                {% else %}
+                <label>&nbsp;</label><input type="submit" value="Create Report"/>
+                {% endif %}
+              </form>
+            </div>
+            <div id="disease_tab_pane" role="tabpanel" class="tab-pane {% if not is_structure and current_condition != 'injury' and not new_report %} active {% endif %}">
+              <form method="POST" action="{{submit_url}}">{% csrf_token %}
+                {{ disease_form.as_p }}
+                <input type="hidden" name="report_type" value="disease"/>
+                {% if "update" in submit_url %}
+                <label>&nbsp;</label><input type="submit" value="Modify Report"/>
+                {% else %}
+                <label>&nbsp;</label><input type="submit" value="Create Report"/>
+                {% endif %}
+              </form>
+            </div>
+            <div id="structure_tab_pane" role="tabpanel" class="tab-pane {% if is_structure %}active {% endif %}">
+              <form method="POST" action="{{submit_url}}">{% csrf_token %}
+                {{ structure_form.as_p }}
+                <input type="hidden" name="report_type" value="structure"/>
+                {% if "update" in submit_url %}
+                <label>&nbsp;</label><input type="submit" value="Modify Report"/>
+                {% else %}
+                <label>&nbsp;</label><input type="submit" value="Create Report"/>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </body>
 </html>

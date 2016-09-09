@@ -2,8 +2,10 @@
 <html>
   <head>
     <title>Send Reports</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'javascript/bootstrap.min.js' %}"></script>
     <script text="text/javascript">
       var lat;
       var lng;
@@ -40,13 +42,13 @@
       function postReport(id_str){
         var element = document.getElementById(id_str);
         var type="";
-        if(id_str.contains("structure")){
-          type="structure";
+        if(id_str.includes("disease")){
+          type="disease";
         } else {
-          type="person";
+          type="injury";
         }
         var status = "";
-        var status_regex = /(.*)_.*/g;
+        var status_regex = /.*_(.*)/g;
         var status = status_regex.exec(id_str)[1];
         var url = "/report_create/";
         if(lat && lng){
@@ -56,7 +58,8 @@
               data:    {"report_type":type,
                         "status":status,
                         "latitude":lat.toPrecision(13),
-                        "longitude":lng.toPrecision(13)
+                        "longitude":lng.toPrecision(13),
+                        "disease_name":"ebola"
                        },
               success: function(data) {
                     element = document.getElementById("report_info");
@@ -103,43 +106,55 @@
       }
     </script>
   </head>
-  <body class="basic_page">
-    <div class="container">
-      <h1><a style="float: right" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>
-        Mobile Reports</h1>
-    <div class="filler">loading location...</div>
+  <body class="">
+    <h1><a style="float: right" href="/map_view"><img style="max-width:32px;" src="/static/images/return_icon.png" /></a>
+      Mobile Reports</h1>
+    <div class="row">
+      <div class="filler col-md-5">
+        loading location...
+      </div>
       <div id="report_info" class="report"></div>
-      <h2>People</h2>
-      <div>
-        <button disabled="true" id="ok_person" type="button" class="button mobile_button d_structure" href="/report_create/">
-          <img src="/static/images/green_person.png" />
-        </button>
-        <button disabled="true" id="injured_person" type="button" class="button mobile_button d_structure" href="/report_create/">
-          <img src="/static/images/yellow_person.png" />
-        </button>
-        <button disabled="true" id="critical_person" type="button" class="button mobile_button d_structure" href="/report_create/">
-          <img src="/static/images/red_person.png" />
-        </button>
-        <button disabled="true" id="deceased_person" type="button" class="button mobile_button d_structure" href="/report_create/">
-          <img src="/static/images/black_person.png" />
-        </button>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist">
+          <li id="injury_tab" role="presentation" class="active"><a href=#injury_tab_pane aria-controls="injury_tab_pane" role="tab" data-toggle="tab">Injury</a></li>
+          <li id="disease_tab" role="presentation" class=""><a href=#disease_tab_pane aria-controls="disease_tab_pane" role="tab" data-toggle="tab">Disease</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="injury_tab_pane" role="tabpanel" class="tab-pane active">
+            <button disabled="true" id="injury_ok" type="button" class="button mobile_button d_structure" href="/report_create/">
+              <img class="mobile_button_img" src={% static "images/green_person.png" %}/>
+            </button>
+            <button disabled="true" id="injury_injured" type="button" class="button mobile_button d_structure" href="/report_create/">
+              <img class="mobile_button_img" src={% static "images/yellow_person.png" %} />
+            </button>
+            <button disabled="true" id="injury_critical" type="button" class="button mobile_button d_structure" href="/report_create/">
+              <div style="position:relative;">
+                <img class="mobile_button_img" src={% static "images/red_person.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:10;right:0;" src="/static/images/green_person.png" />
+              </div>
+            </button>
+            <button disabled="true" id="injury_deceased" type="button" class="button mobile_button d_structure" href="/report_create/">
+              <img class="mobile_button_img" src={% static "images/black_person.png" %}/>
+            </button>
+          </div>
+          <div id="disease_tab_pane" role="tabpanel" class="tab-pane">
+            <button disabled="true" id="disease_cleared" type="button" class="button mobile_button d_structure" href="/report_create/">
+              <img class="mobile_button_img" src={% static "images/green_person.png" %}/>
+            </button>
+            <button disabled="true" id="disease_stable" type="button" class="button mobile_button d_structure" href="/report_create/">
+              <img class="mobile_button_img" src={% static "images/yellow_person.png" %}/>
+            </button>
+            <button disabled="true" id="disease_critical" type="button" class="button mobile_button d_structure" href="/report_create/">
+              <img class="mobile_button_img" src={% static "images/red_person.png" %}/>
+            </button>
+            <button disabled="true" id="disease_deceased" type="button" class="button mobile_button d_structure" href="/report_create/">
+              <img class="mobile_button_img" src={% static "images/black_person.png" %}/>
+            </button>
+          </div>
+        </div>
       </div>
-      <h2>Structures</h2>
-      <div class="">
-        <button disabled="true" id="ok_structure" type="button" class="button mobile_button ok_structure" href="/report_create/">
-          <img src="/static/images/green_structure.png" />
-        </button>
-        <button disabled="true" id="damaged_structure" type="button" class="button mobile_button damaged_structure" href="/report_create/">
-          <img src="/static/images/yellow_structure.png" />
-        </button>
-        <button disabled="true" id="unsound_structure" type="button" class="button mobile_button d_structure" href="/report_create/">
-          <img src="/static/images/red_structure.png" />
-        </button>
-        <button disabled="true" id="destroyed_structure" type="button" class="button mobile_button d_structure" href="/report_create/">
-          <img src="/static/images/black_structure.png" />
-        </button>
-      </div>
-      </div>
+    </div>
   </body>
 </html>
-

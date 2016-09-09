@@ -17,25 +17,29 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-import triageWeb.views as views
+import triageWeb.views.map as maps
+import triageWeb.views.helper_views as helpers
+import triageWeb.views.login as login
+import triageWeb.views.report as report
 
 urlpatterns = [
-    url(r'^$', views.map_view),
+    url(r'^$', maps.map_view),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', auth_views.login, {'template_name': 'admin/login.html'}),
-    url(r'^login_mobile/',views.login_mobile),
-    url(r'^map_view/', views.map_view),
-    url(r'^report/$', views.report),
-    url(r'^mobile_report/', views.mobile_report),
-    url(r'^report_create/', views.report_create),
-    url(r'^report/list/', views.report_list),
-    url(r'^report/person/(?P<id>\d+)/edit/', views.report_person_edit),
-    url(r'^report/(?P<report_type>\w+)/(?P<id>\d+)/update/', views.report_update),
-    url(r'^report/person/(?P<id>\d+)/$', views.report_personnel_view),
-    url(r'^report/person/(?P<id>\d+)/delete$', views.report_personnel_delete),
-    url(r'^report/structure/(?P<id>\d+)/$', views.report_structure_view),
-    url(r'^report/structure/(?P<id>\d+)/edit/', views.report_structure_edit),
-    url(r'^report/structure/(?P<id>\d+)/delete$', views.report_structure_delete),
-    url(r'^(?P<state>\w+)/(?P<lat>-?\d+\.\d+)/(?P<lon>-?\d+\.\d+)', views.mobile_post_report),
-    url(r'^parse_json/', views.parse_json)
+    url(r'^login_mobile/',login.login_mobile),
+    url(r'^map_view/', maps.map_view),
+    url(r'^report/$', report.report),
+    url(r'^mobile_report/', report.mobile_report),
+    url(r'^report_create/', report.report_create),
+    url(r'^report/list/', report.report_list),
+    url(r'^report/person/(?P<id>\d+)/edit/', report.report_person_edit),
+    url(r'^report/(?P<report_type>\w+)/(?P<id>\d+)/update/', report.report_update),
+    url(r'^report/person/(?P<id>\d+)/$', report.report_personnel_view),
+    url(r'^report/person/(?P<id>\d+)/delete$', report.report_personnel_delete),
+    url(r'^report/structure/(?P<id>\d+)/$', report.report_structure_view),
+    url(r'^report/structure/(?P<id>\d+)/edit/', report.report_structure_edit),
+    url(r'^report/structure/(?P<id>\d+)/delete$', report.report_structure_delete),
+    url(r'^(?P<state>\w+)/(?P<lat>-?\d+\.\d+)/(?P<lon>-?\d+\.\d+)', report.mobile_post_report),
+    url(r'^parse_json/', helpers.parse_json),
+    url(r'^parse_hospital_data/', helpers.view_hospital_data)
 ]

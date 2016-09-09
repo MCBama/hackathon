@@ -29,7 +29,7 @@
        <tr>
          <td>{{ report|class_name }}</td>
          {% for field in field_list %}
-         <td>{{ report|getattribute:field.0 }}</td>
+          <td>{{ report|getattribute:field.0 }}</td>
          {% endfor %}
          <td>
            <form action="/report/{{report|class_name_lower}}/{{report.id}}/delete" method="POST">{% csrf_token %}
