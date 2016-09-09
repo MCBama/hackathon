@@ -2,46 +2,42 @@ from django import forms
 
 from .models import Person
 from .models import Structure
+from .models import Injury
+from .models import Disease
 
 class StructureForm(forms.ModelForm):
-  report_type = forms.ChoiceField(choices=[('structure','Structure'),('person','Person')])
   class Meta:
     model = Structure
     fields=[
-      'status',
-      'latitude',
-      'longitude'
-    ]
-
-class ReportForm(forms.ModelForm):
-  report_type = forms.ChoiceField(choices=[('structure','Structure'),('person','Person')])
-  class Meta:
-    model = Person
-    fields=[
-      'status',
-      'latitude',
-      'longitude'
-    ]
-  
-class UpdatePersonForm(forms.ModelForm):
-  def __init__(self, *args, **kwargs):
-    super(UpdatePersonForm, self).__init__(*args, **kwargs)
-    self.fields['triage'].required = False
-  class Meta:
-    model = Person
-    fields=[
-      'status',
       'latitude',
       'longitude',
-      'triage'
+      'status'
     ]
-    
-        
-class UpdateStructureForm(forms.ModelForm):
+
+class DiseaseReportForm(forms.ModelForm):
+  def __init__(self, *args, **kwargs):
+    super(DiseaseReportForm, self).__init__(*args, **kwargs)
+    self.fields['center'].required = False
+    self.fields['status'] = forms.ChoiceField(Disease.STATUS, initial="cleared")
+    self.fields['disease_name'] = forms.ChoiceField(Disease.DISEASES, initial="ebola")
   class Meta:
-    model = Structure
+    model = Person
     fields=[
-      'status',
       'latitude',
-      'longitude'
+      'longitude',
+      'center'
+    ]
+
+class InjuryReportForm(forms.ModelForm):
+  def __init__(self, *args, **kwargs):
+    super(InjuryReportForm, self).__init__(*args, **kwargs)
+    self.fields['center'].required = False
+    self.fields['status'] = forms.ChoiceField(Injury.STATUS, initial="ok")
+
+  class Meta:
+    model = Person
+    fields=[
+      'latitude',
+      'longitude',
+      'center'
     ]
