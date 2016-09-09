@@ -40,5 +40,6 @@ urlpatterns = [
     url(r'^report/structure/(?P<id>\d+)/edit/', report.report_structure_edit),
     url(r'^report/structure/(?P<id>\d+)/delete$', report.report_structure_delete),
     url(r'^(?P<state>\w+)/(?P<lat>-?\d+\.\d+)/(?P<lon>-?\d+\.\d+)', report.mobile_post_report),
-    url(r'^parse_json/', helpers.parse_json)
+    url(r'^parse_json/', helpers.parse_json),
+    url(r'^parse_hospital_data/', helpers.view_hospital_data)
 ]
