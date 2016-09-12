@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
   <head>
-    <title>Send Reports</title>
+    <title>View Reports</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <meta name="viewport" content="initial-scale=1.0">
   </head>
@@ -30,3 +30,24 @@
   </div>
   </body>
 </html>
+
+<div class="container-fluid">
+<div class="row">
+  <h1>Patient History</h1>
+    <table class="table-striped">
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Center</th>
+      <th>Reporter</th>
+      <th>Report Time</th>
+      {% for report in history %}
+      <tr>
+        <td>{{report.latitude|floatformat:5}}</td>
+        <td>{{report.longitude|floatformat:5}}</td>
+        <td>{{report.center}}</td>
+        <td>{{report.reporter}}</td>
+        <td>{{report.report_time|date:"D d M Y H:i"}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+</div>

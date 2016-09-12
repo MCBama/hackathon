@@ -7,6 +7,8 @@ from triageWeb.models import Structure
 from triageWeb.models import Condition
 from triageWeb.models import Disease
 from triageWeb.models import Injury
+from triageWeb.models import PatientHistory
+from triageWeb.models import Report
 # Register your models here.
 admin.site.register(Reporter)
 admin.site.register(HealthCenter)
@@ -16,3 +18,5 @@ admin.site.register(Structure)
 admin.site.register(Condition)
 admin.site.register(Disease)
 admin.site.register(Injury)
+admin.site.register(PatientHistory)
+admin.site.register(Report)

@@ -43,7 +43,10 @@
             <a href=#structure_tab_pane aria-controls="structure_tab_pane" role="tab" data-toggle="tab">Structure</a></li>
           </ul>
           <div class="tab-content">
-            <div id="injury_tab_pane" role="tabpanel" class="tab-pane {% if not is_structure and current_condition != 'disease' %} active {% endif %}">
+            <div id="injury_tab_pane" role="tabpanel" class="tab-pane
+            {% if not is_structure and current_condition != 'disease' %}
+              active
+            {% endif %}">
               <form method="POST" action="{{submit_url}}">{% csrf_token %}
                 {{ injury_form.as_p }}
                 <input type="hidden" name="report_type" value="injury"/>
@@ -54,7 +57,10 @@
                 {% endif %}
               </form>
             </div>
-            <div id="disease_tab_pane" role="tabpanel" class="tab-pane {% if not is_structure and current_condition != 'injury' and not new_report %} active {% endif %}">
+            <div id="disease_tab_pane" role="tabpanel" class="tab-pane
+              {% if not is_structure and current_condition != 'injury' and not new_report %}
+                active
+              {% endif %}">
               <form method="POST" action="{{submit_url}}">{% csrf_token %}
                 {{ disease_form.as_p }}
                 <input type="hidden" name="report_type" value="disease"/>
@@ -65,7 +71,10 @@
                 {% endif %}
               </form>
             </div>
-            <div id="structure_tab_pane" role="tabpanel" class="tab-pane {% if is_structure %}active {% endif %}">
+            <div id="structure_tab_pane" role="tabpanel" class="tab-pane
+            {% if is_structure %}
+              active
+            {% endif %}">
               <form method="POST" action="{{submit_url}}">{% csrf_token %}
                 {{ structure_form.as_p }}
                 <input type="hidden" name="report_type" value="structure"/>
