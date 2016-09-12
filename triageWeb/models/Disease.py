@@ -21,10 +21,10 @@ class Disease(models.Model):
   )
 
   image_urls = {
-    'deceased': 'images/black_person.png',
-    'critical': 'images/red_person.png',
-    'stable': 'images/yellow_person.png',
-    'cleared': 'images/green_person.png'
+    'deceased': 'images/trans_hatch_black.png',
+    'critical': 'images/trans_hatch_red.png',
+    'stable': 'images/trans_hatch_yellow.png',
+    'cleared': 'images/trans_hatch_green.png',
   }
 
   disease_name = models.CharField(choices = DISEASES, default=EBOLA, max_length=20)

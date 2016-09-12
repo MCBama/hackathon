@@ -62,6 +62,7 @@ class Person(models.Model):
     string = (
       "<div>"
         "Type: Person<br/>"
+        "Patient ID: %s<br/>"
         "Initial Reporter: %s<br/>"
         "Initial Report Time: %s<br/>"
         "Latest Updater: %s<br/>"
@@ -70,7 +71,8 @@ class Person(models.Model):
         "Status: %s<br/>"
         "Latitude: %.5f<br/>"
         "Longitude: %.5f<br/>"
-      "</div>" % (self.initial_reporter,
+      "</div>" % (self.id,
+                  self.initial_reporter,
                   self.report_time.strftime("%Y-%m-%d %H:%M:%S"),
                   self.updater,
                   self.update_time.strftime("%Y-%m-%d %H:%M:%S"),

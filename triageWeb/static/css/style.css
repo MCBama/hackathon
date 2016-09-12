@@ -1,3 +1,9 @@
+.basic_page{
+  margin-left:15px;
+  margin-right:15px;
+  margin-top:5px;
+}
+
 .mobile_button{
   margin-right:20px;
 }
@@ -5,4 +11,21 @@
 .mobile_button_img {
   width:300px;
   height:300px;
+}
+
+.centered-table {
+  text-align:center
+}
+
+.centered-table th{
+  text-align:center
+}
+
+.centered-table td{
+  padding-right:5px;
+  padding-left:5px;
+}
+
+.table-button {
+  display:inline-table;
 }
