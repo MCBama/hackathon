@@ -17,4 +17,4 @@
   1. Install Django within the virtual environment by calling `pip install django`
   2. Create database for project by calling `python manage.py migrate`
   3. Create superuser for control of the project by typing `python manage.py createsuperuser` and filling in the prompted information
-  4. Start project by calling the 'start_app.bat' script in the repository
+  4. Start project by calling the `start_app.bat` script in the repository
