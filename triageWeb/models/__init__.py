@@ -11,3 +11,8 @@ from .HealthCenter import *
 from .Disease import *
 from .Injury import *
 from .Condition import *
+
+from .Report import *
+from .PatientHistory import *
+
+from .signals import *

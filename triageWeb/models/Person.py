@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+
 import datetime
 
 from .Reporter import *
@@ -9,6 +10,7 @@ class Person(models.Model):
   def get_initial(initial_reporter):
     return initial_reporter.id
 
+  # one to one with PatientHistory
   latitude = models.DecimalField(decimal_places=30, max_digits=50, default=0.0)
   longitude = models.DecimalField(decimal_places=30, max_digits=50, default=0.0)
   initial_reporter = models.ForeignKey(Reporter, related_name='reporter')
@@ -60,23 +62,25 @@ class Person(models.Model):
     string = (
       "<div>"
         "Type: Person<br/>"
+        "Patient ID: %s<br/>"
         "Initial Reporter: %s<br/>"
         "Initial Report Time: %s<br/>"
         "Latest Updater: %s<br/>"
         "Last Updated: %s<br/>"
         "Name: %s %s<br/>"
         "Status: %s<br/>"
-        "Latitude: %.13f<br/>"
-        "Longitude: %.13f<br/>"
-      "</div>" % (self.initial_reporter,
+        "Latitude: %.5f<br/>"
+        "Longitude: %.5f<br/>"
+      "</div>" % (self.id,
+                  self.initial_reporter,
                   self.report_time.strftime("%Y-%m-%d %H:%M:%S"),
                   self.updater,
                   self.update_time.strftime("%Y-%m-%d %H:%M:%S"),
                   self.first_name.capitalize(),
                   self.last_name.capitalize(),
                   self.status.__str__().capitalize(),
-                  self.latitude,
-                  self.longitude)
+                  round(self.latitude,5),
+                  round(self.longitude,5))
     )
     return string
 

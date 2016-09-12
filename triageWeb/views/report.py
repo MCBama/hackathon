@@ -87,7 +87,6 @@ def report_create(request):
       form = InjuryReportForm(request.POST)
     else:
       form = StructureForm(request.POST)
-    print(request.POST)
     if form.is_valid():
       reporter = Reporter.objects.get(user=request.user)
       report_type = request.POST['report_type']
@@ -96,7 +95,8 @@ def report_create(request):
         person_report = Person(
           latitude=form.cleaned_data['latitude'],
           longitude=form.cleaned_data['longitude'],
-          initial_reporter=reporter
+          initial_reporter=reporter,
+          updater = reporter
         )
         person_report.save()
         condition = Condition(
@@ -221,7 +221,17 @@ def report_list(request):
 
 def report_personnel_view(request, id):
   person_report = Person.objects.get(pk=id)
-  return render(request, 'report_view.html',{'report':person_report, 'type':'person'})
+  report_history = person_report.patienthistory.report_set.all().order_by('report_time')
+
+  report_history = report_history.order_by('-report_time')
+  for report in report_history:
+    print(report)
+  return render(request, 'report_view.html',
+  {
+    'report':person_report,
+    'history':report_history,
+    'type':'person'
+  })
 
 def report_personnel_delete(request, id):
   if request.method == "POST":

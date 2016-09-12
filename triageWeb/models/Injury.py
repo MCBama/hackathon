@@ -16,10 +16,10 @@ class Injury(models.Model):
   )
 
   image_urls = {
-    'deceased': 'images/black_person.png',
-    'critical': 'images/red_person.png',
-    'injured': 'images/yellow_person.png',
-    'ok': 'images/green_person.png'
+    'deceased': 'images/trans_hatch_black.png',
+    'critical': 'images/trans_hatch_red.png',
+    'injured': 'images/trans_hatch_yellow.png',
+    'ok': 'images/trans_hatch_green.png',
   }
 
   status = models.CharField(choices = STATUS, default = OK, max_length=20)
