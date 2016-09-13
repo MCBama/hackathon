@@ -29,18 +29,15 @@
 .table-button {
   display:inline-table;
 }
-.nav-bar {
-  float: none !important;
-  z-index: 500;
-}
-.report_list-table {
+
+.report-list-table {
   width: 100%;
   margin-top: 20px;
 }                
-.report_list-table  td {
+.report-list-table  td {
   padding: 5px;
 }
-.report_list-table tr:hover {
+.report-list-table tr:hover {
   background-color: #ffc5c5 !important;
   cursor: default;
 }
