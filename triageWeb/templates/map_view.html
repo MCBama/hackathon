@@ -21,10 +21,10 @@
         height: 100%;
         position: absolute;
         left: 0;
-        top: 100px;
+        top: 50px;
         width: 100%;
         z-index:400;
-        height: calc(100% - 100px);
+        height: calc(100% - 50px);
       }
 
       h1 {
@@ -486,7 +486,7 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCML1Iio5WX2UfElfnG2JkPOLyBaHd0Gxs&callback=initMap"
     async defer></script>
-
+                   <!--
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -501,7 +501,27 @@
           </ul>
         </div>
       </div>
-    </nav>
+    </nav>     -->
+    
+<nav class="navbar navbar-inverse navbar-mapfix">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+            <li class="active"><a href="/map_view/">Map</a></li>
+            <li><a href="/report/list/">Reports</a></li>
+            <li><a href="/mobile_report/">Location Report</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <!--<div class="main_buttons">
       <h1>Mobile Damage Assessment</h1>
