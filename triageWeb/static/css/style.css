@@ -29,3 +29,18 @@
 .table-button {
   display:inline-table;
 }
+
+.nav-bar {
+  float: none !important;
+}
+.report_list-table {
+  width: 100%;
+  margin-top: 20px;
+}
+.report_list-table tr:hover {
+  background-color: #ffc5c5 !important;
+  cursor: default;
+}
+
+
+
