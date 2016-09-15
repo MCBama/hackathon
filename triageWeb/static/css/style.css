@@ -29,3 +29,23 @@
 .table-button {
   display:inline-table;
 }
+
+.report-list-table {
+  width: 100%;
+  margin-top: 20px;
+}                
+.report-list-table  td {
+  padding: 5px;
+}
+.report-list-table tr:hover {
+  background-color: #ffc5c5 !important;
+  cursor: default;
+}
+.table-fullwidth {
+  width: 100%; 
+}
+.navbar-mapfix {
+  z-index: 500 /* map_view navbar fix */; 
+}
+
+

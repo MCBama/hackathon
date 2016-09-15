@@ -8,7 +8,7 @@
     <script src="{% static 'javascript/bootstrap.min.js' %}"></script>
 
     <title>Map View</title>
-    <meta name="viewport" content="initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <style>
       html, body {
@@ -21,10 +21,10 @@
         height: 100%;
         position: absolute;
         left: 0;
-        top: 100px;
+        top: 50px;
         width: 100%;
         z-index:400;
-        height: calc(100% - 100px);
+        height: calc(100% - 50px);
       }
 
       h1 {
@@ -447,9 +447,9 @@
            });
 
         contentString =
-          "Feature: " + center.properties.mapText+" <br/>" +
-          "Status: " + center.properties.status+" <br/>" +
-          "Id: " + center.properties.id + "<br/>" +
+          "Feature: <strong>" + center.properties.mapText+"</strong><br/>" +
+          "Status: <strong>" + center.properties.status+"</strong><br/>" +
+          "Id: <strong>" + center.properties.id + "</strong><br/>" +
           "Green: " + center.properties.green + "<br/>" +
           "Yellow: " + center.properties.yellow + "<br/>" +
           "Red: " + center.properties.red + "<br/>"
@@ -472,10 +472,10 @@
       function generateTooltip(obj){
         var string ='<div>';
         if(obj['condition']){
-          string += 'Condition: ' + obj['condition'] + '<br/>'
+          string += 'Condition: <strong>' + obj['condition'] + '</strong><br/>'
         }
         string +=
-                'Status: ' + obj['status'] + '<br/>' +
+                'Status: <strong>' + obj['status'] + '</strong><br/>' +
                 'Reported: ' + obj['report_time'] + '<br/>' +
                 'Last Update: ' + obj['last_update'] + '<br/>' +
                 '<a href="' + obj['view_url'] + '">View</a> ' +
@@ -486,22 +486,28 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCML1Iio5WX2UfElfnG2JkPOLyBaHd0Gxs&callback=initMap"
     async defer></script>
-
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/map_view/">Map <span class="sr-only">(current)</span></a></li>
+                   
+                   
+    
+<nav class="navbar navbar-inverse navbar-mapfix">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+            <li class="active"><a href="/map_view/">Map</a></li>
             <li><a href="/report/list/">Reports</a></li>
             <li><a href="/mobile_report/">Location Report</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <!--<div class="main_buttons">
       <h1>Mobile Damage Assessment</h1>
