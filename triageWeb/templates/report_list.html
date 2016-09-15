@@ -12,60 +12,38 @@
     <script src="{% static 'javascript/bootstrap.min.js' %}"></script>    
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-  <body class="basic_page"> 
+  <body class=""> 
   
   
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-            <li><a href="/map_view/">Map</a></li>
-            <li class="active"><a href="/report/list/">Reports</a></li>
-            <li><a href="/mobile_report/">Location Report</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-  
-  
-<!--
-  
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
-        </div>
-
-        <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav nav-bar">
-            <li><a href="/map_view/">Map</a></li>
-            <li class="active"><a href="/report/list/">Reports</a></li>
-            <li><a href="/mobile_report/">Location Report</a></li>
-            <li style="float: right;"><a style="padding: 10px 0;" href="/map_view"><img style="max-width:28px;" src="/static/images/return_icon.png" /></a></li>
-          </ul>
-        </div>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
       </div>
-    </nav>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+              <li><a href="/map_view/">Map</a></li>
+              <li class="active"><a href="/report/list/">Reports</a></li>
+              <li><a href="/mobile_report/">Location Report</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  
     
--->    
-    
-    
-    
+  <div class="basic_page">
     
     <div class="input-container">
       <input id="filterInput" placeholder="type to filter" value="Type To Filter">
     </div>
-    <table class="table-striped centered-table report_list-table" cellspacing="0">
+    <table class="table-striped centered-table report-list-table" cellspacing="0">
       <thead>
       <tr>
         <th>Report Type</th>
@@ -141,5 +119,7 @@
 });
 
     </script>
+    
+    </div>
   </body>
 </html>
