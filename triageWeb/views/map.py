@@ -8,13 +8,11 @@ from triageWeb.models import TriageCoord
 from triageWeb.models import HealthCenter
 
 def map_view(request):
-  casualty_list = Person.objects.all().filter(is_active=True)
-  print(casualty_list)
+  casualty_list = Person.objects.all().filter(is_active=True,center=None)
   structure_list = Structure.objects.all().filter(is_active=True)
   triage_list = TriageArea.objects.filter(properties__mapText="Triage Area")
   center_list = HealthCenter.objects.all()
-  #for center in center_list:
-  #  center.update_counts(casualty_list.filter(center=center))
+  
   for triage in triage_list:
     coord = TriageCoord.objects.get(geoObj=triage.geometry)
     triage.geometry.coordinates = {'lat':coord.lat, 'lng':coord.lng}

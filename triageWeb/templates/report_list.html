@@ -1,76 +1,47 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% load modelTags %}
 {% load tz %}
 
 <!doctype html>
-<html>
-  <head>
-    <title>Report List</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="{% static 'javascript/bootstrap.min.js' %}"></script>    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body class=""> 
-  
-  
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-              <li><a href="/map_view/">Map</a></li>
-              <li class="active"><a href="/report/list/">Reports</a></li>
-              <li><a href="/mobile_report/">Location Report</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+{% block title %}Report List{% endblock %}
 
-  
-  
-    
+{% block body_block %}
   <div class="basic_page">
-    
+
     <div class="input-container">
       <input id="filterInput" placeholder="type to filter" value="Type To Filter">
     </div>
     <table class="table-striped centered-table report-list-table" cellspacing="0">
       <thead>
-      <tr>
         <th>Report Type</th>
         {% for field in field_list %}
         <th>{{field.1}}</th>
         {% endfor %}
         <th>Options</th>
-      </tr>
       </thead>
       <tbody>
     {% for report in report_list %}
        <tr>
          <td>{{ report|class_name }}</td>
          {% for field in field_list %}
-          <td>{{ report|getattribute:field.0 }}</td>
+          {% if field.0 == "center" and report|class_name_lower == "structure" %}
+            <td>N/A</td>
+          {% elif field.0 == "center" and report.center %}
+            <td><a href="/center/{{report.center.id}}">{{report.center}}</a>
+          {% else %}
+            <td>{{ report|getattribute:field.0 }}</td>
+          {% endif %}
          {% endfor %}
          <td>
-           <form class="table-button" action="/report/{{report|class_name_lower}}/{{report.id}}" method="GET">{% csrf_token %}
-             <input style="width: 100%" type="submit" value="View"/>
-           </form>
-           <form class="table-button" action="/report/{{report|class_name_lower}}/{{report.id}}/edit" method="GET">{% csrf_token %}
-             <input style="width: 100%" type="submit" value="Edit"/>
-           </form>
-           <form class="table-button" action="/report/{{report|class_name_lower}}/{{report.id}}/delete" method="POST">{% csrf_token %}
-            <input type="hidden" name="redirect" value="list"/>
-            <input style="width: 100%" type="submit" value="Delete"/>
-          </form>
+           <div class="btn-group" role="group" areai-label="...">
+            <a type="button" class="btn btn-default" href="/report/{{report|class_name_lower}}/{{report.id}}" method="GET">View</a>
+            <a type="button" class="btn btn-default" href="/report/{{report|class_name_lower}}/{{report.id}}/edit" method="GET">Edit</a>
+            <form class="table-form" action="/report/{{report|class_name_lower}}/{{report.id}}/delete" method="POST">{% csrf_token %}
+              <input type="hidden" name="redirect" value="list"/>
+              <button type="submit" class="btn btn-danger"> Delete </button>
+            </form>
+           </div>
          </td>
       </tr>
     {% endfor %}
@@ -119,7 +90,6 @@
 });
 
     </script>
-    
+
     </div>
-  </body>
-</html>
+{% endblock %}

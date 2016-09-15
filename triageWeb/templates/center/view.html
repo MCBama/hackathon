@@ -1,0 +1,87 @@
+{% load staticfiles %}
+{% load modelTags %}
+
+<html>
+  <head>
+    <title>{{center.name}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'javascript/bootstrap.min.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="/map_view/">Map</a></li>
+            <li><a href="/report/list/">Reports</a></li>
+            <li><a href="/mobile_report/">Location Report</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="basic_page">
+      <div class="container-fluid">
+        <div class="row">
+          <h1>{{center.name}}</h1>
+        </div>
+        <div class="row">
+          <table>
+            <tbody>
+              <tr><td style="text-align:right;padding-right:5px">Status: </td><td>{{center.properties.status}}</td></tr>
+              <tr><td style="text-align:right;padding-right:5px">Verified: </td><td>{{center.properties.verified}}</td></tr>
+              <tr><td style="text-align:right;padding-right:5px">Latitude: </td><td>{{center.properties.latitude|floatformat:5}}</td></tr>
+              <tr><td style="text-align:right;padding-right:5px">Longitude: </td><td>{{center.properties.longitude|floatformat:5}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        {% if patient_list.count > 0 %}
+        <div class="row">
+          <h2> Patient List </h2>
+          <table class="table-striped centered-table">
+            <thead>
+              <th>Patient ID </th>
+              <th>Condition</th>
+              <th>Status</th>
+              <th>Initial Reporter</th>
+              <th>Report Time</th>
+              <th>Updater</th>
+              <th>Update Time</th>
+              <th>Options</th>
+            </thead>
+            <tbody>
+              {% for patient in patient_list %}
+                <tr>
+                  <td>{{patient.id}}</td>
+                  <td>{{patient.condition_type.capitalize}}</td>
+                  <td>{{patient.status.capitalize}}</td>
+                  <td>{{patient.initial_reporter}}</td>
+                  <td>{{patient.report_time|date:"M. d Y H:i"}}</td>
+                  <td>{{patient.updater}}</td>
+                  <td>{{patient.update_time|date:"M. d Y H:i"}}</td>
+                  <td class="btn-group" role="group">
+                   <a type="button" class="btn btn-default" href="/report/person/{{patient.id}}" method="GET">View</a>
+                   <a type="button" class="btn btn-default" href="/report/person/{{patient.id}}/edit" method="GET">Edit</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+
+</html>

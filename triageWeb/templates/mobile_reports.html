@@ -1,11 +1,7 @@
+{% extends 'base.html'%}
 {% load staticfiles %}
-<html>
-  <head>
-    <title>Send Reports</title>
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="{% static 'javascript/bootstrap.min.js' %}"></script>
+    {% block title %}Send Reports{% endblock %}
+    {% block head %}
     <script text="text/javascript">
       var lat;
       var lng;
@@ -108,32 +104,12 @@
         element.addEventListener('click', function(){postReport(element.id)});
       }
     </script>
-  </head>
-  <body class="">
-  
-    
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-              <li><a href="/map_view/">Map</a></li>
-              <li><a href="/report/list/">Reports</a></li>
-              <li class="active"><a href="/mobile_report/">Location Report</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-    <div class="basic_page">
+  {% endblock %}
 
-    <h1> 
+{% block body_block %}
+  <div class="basic_page">
+
+    <h1>
       Mobile Reports</h1>
     <div class="row">
       <div class="filler col-md-5">
@@ -143,7 +119,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs report-tabs" role="tablist">
           <li id="injury_tab" role="presentation" class="active"><a href=#injury_tab_pane aria-controls="injury_tab_pane" role="tab" data-toggle="tab">Injury</a></li>
           <li id="disease_tab" role="presentation" class=""><a href=#disease_tab_pane aria-controls="disease_tab_pane" role="tab" data-toggle="tab">Disease</a></li>
           <li id="structure_tab" role="presentation" class=""><a href=#structure_tab_pane aria-controls="structure_tab_pane" role="tab" data-toggle="tab">Structure</a></li>
@@ -152,74 +128,85 @@
           <div id="injury_tab_pane" role="tabpanel" class="tab-pane active">
             <button disabled="true" id="injury_ok" type="button" class="button mobile_button" href="/report_create/">
               <div style="position:relative;">
-                <img class="mobile_button_img" src={% static "images/icon_injury.jpg" %}/>
-                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;opacity:0.5" src={% static "images/trans_hatch_green.png" %} />
+                <img class="mobile_button_img" src={% static "images/injury_white.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/injury_hatch_green.png" %} />
               </div>
             </button>
             <button disabled="true" id="injury_injured" type="button" class="button mobile_button" href="/report_create/">
               <div style="position:relative;">
-                <img class="mobile_button_img" src={% static "images/icon_injury.jpg" %}/>
-                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;opacity:0.5" src={% static "images/trans_hatch_yellow.png" %} />
+                <img class="mobile_button_img" src={% static "images/injury_white.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/injury_hatch_yellow.png" %} />
               </div>
             </button>
             <button disabled="true" id="injury_critical" type="button" class="button mobile_button" href="/report_create/">
               <div style="position:relative;">
-                <img class="mobile_button_img" src={% static "images/icon_injury.jpg" %}/>
-                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;opacity:0.5" src={% static "images/trans_hatch_red.png" %} />
+                <img class="mobile_button_img" src={% static "images/injury_white.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/injury_hatch_red.png" %} />
               </div>
             </button>
             <button disabled="true" id="injury_deceased" type="button" class="button mobile_button" href="/report_create/">
               <div style="position:relative;">
-                <img class="mobile_button_img" src={% static "images/icon_injury.jpg" %}/>
-                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;opacity:0.5" src={% static "images/trans_hatch_black.png" %} />
+                <img class="mobile_button_img" src={% static "images/injury_white.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/injury_hatch_black.png" %} />
               </div>
             </button>
           </div>
+
           <div id="disease_tab_pane" role="tabpanel" class="tab-pane">
             <button disabled="true" id="disease_cleared" type="button" class="button mobile_button" href="/report_create/">
               <div style="position:relative;">
-                <img class="mobile_button_img" src={% static "images/icon_disease.jpg" %}/>
-                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;opacity:0.5" src={% static "images/trans_hatch_green.png" %} />
+                <img class="mobile_button_img" src={% static "images/disease_white.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/disease_hatch_green.png" %} />
               </div>
             </button>
             <button disabled="true" id="disease_stable" type="button" class="button mobile_button" href="/report_create/">
               <div style="position:relative;">
-                <img class="mobile_button_img" src={% static "images/icon_disease.jpg" %}/>
-                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;opacity:0.5" src={% static "images/trans_hatch_yellow.png" %} />
+                <img class="mobile_button_img" src={% static "images/disease_white.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/disease_hatch_yellow.png" %} />
               </div>
             </button>
             <button disabled="true" id="disease_critical" type="button" class="button mobile_button" href="/report_create/">
               <div style="position:relative;">
-                <img class="mobile_button_img" src={% static "images/icon_disease.jpg" %}/>
-                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;opacity:0.5" src={% static "images/trans_hatch_red.png" %} />
+                <img class="mobile_button_img" src={% static "images/disease_white.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/disease_hatch_red.png" %} />
               </div>
             </button>
             <button disabled="true" id="disease_deceased" type="button" class="button mobile_button" href="/report_create/">
               <div style="position:relative;">
-                <img class="mobile_button_img" src={% static "images/icon_disease.jpg" %}/>
-                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;opacity:0.5" src={% static "images/trans_hatch_black.png" %} />
+                <img class="mobile_button_img" src={% static "images/disease_white.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/disease_hatch_black.png" %} />
               </div>
             </button>
           </div>
 
           <div id="structure_tab_pane" role="tabpanel" class="tab-pane">
             <button disabled="true" id="structure_ok" type="button" class="button mobile_button" href="/report_create/">
-              <img class="mobile_button_img" src={% static "images/green_structure.png" %}/>
+              <div style="position:relative;">
+                <img class="mobile_button_img" src={% static "images/building_base.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/structure_hatch_green.png" %} />
+              </div>
             </button>
             <button disabled="true" id="structure_damaged" type="button" class="button mobile_button" href="/report_create/">
-              <img class="mobile_button_img" src={% static "images/yellow_structure.png" %}/>
+              <div style="position:relative;">
+                <img class="mobile_button_img" src={% static "images/building_base.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/structure_hatch_yellow.png" %} />
+              </div>
             </button>
             <button disabled="true" id="structure_unsound" type="button" class="button mobile_button" href="/report_create/">
-              <img class="mobile_button_img" src={% static "images/red_structure.png" %}/>
+              <div style="position:relative;">
+                <img class="mobile_button_img" src={% static "images/building_base.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/structure_hatch_red.png" %} />
+              </div>
             </button>
             <button disabled="true" id="structure_destroyed" type="button" class="button mobile_button d_structure" href="/report_create/">
-              <img class="mobile_button_img" src={% static "images/black_structure.png" %}/>
+              <div style="position:relative;">
+                <img class="mobile_button_img" src={% static "images/building_base.png" %}/>
+                <img class="mobile_button_img" style="position:absolute;bottom:0;right:0;" src={% static "images/structure_hatch_black.png" %} />
+              </div>
             </button>
           </div>
-
         </div>
       </div>
     </div>
-    </div> <!-- /basic_page -->
-  </body>
-</html>
+  </div> <!-- /basic_page -->
+{% endblock %}
