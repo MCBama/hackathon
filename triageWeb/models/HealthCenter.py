@@ -8,7 +8,7 @@ class HealthCenter(models.Model):
   created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
   center_type = models.CharField(max_length=30)
-  center_id = models.CharField(max_length=6)
+  center_id = models.CharField(max_length=6, unique=True)
 
   properties = models.OneToOneField(CenterProperties)
 
