@@ -32,24 +32,25 @@ from triageWeb.models import TriageCoord
 from triageWeb.models import TriageGeometry
 
 
-from triageWeb.forms import InjuryReportForm
 from triageWeb.forms import DiseaseReportForm
 from triageWeb.forms import StructureForm
+from triageWeb.forms import InjuryNewReportForm
 from triageWeb.forms import InjuryReportForm
+from triageWeb.forms import DiseaseNewReportForm
 from triageWeb.forms import DiseaseReportForm
 from triageWeb.forms import StructureForm
 
 @login_required
 def report(request):
-  injury_form = InjuryReportForm()
-  disease_form = DiseaseReportForm()
+  injury_form = InjuryNewReportForm()
+  disease_form = DiseaseNewReportForm()
   structure_form = StructureForm()
   if request.GET and request.GET['lng'] and request.GET['lat']:
-    injury_form = InjuryReportForm(initial={
+    injury_form = InjuryNewReportForm(initial={
         'latitude':request.GET['lat'],
         'longitude':request.GET['lng']
       })
-    disease_form = DiseaseReportForm(initial={
+    disease_form = DiseaseNewReportForm(initial={
         'latitude':request.GET['lat'],
         'longitude':request.GET['lng']
       })

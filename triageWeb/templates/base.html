@@ -19,11 +19,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
+          <a class="navbar-left" href="/map_view/"><img style="height:40px;margin-top:5px;padding-right:5px" src="{% static 'images/DRAMALogoTrans.png' %}"/></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li {% if request.path == "/map_view/"%}class="active"{%endif%}><a href="/map_view/">Map</a></li>
+            <li {% if request.path == "/map_view/" or request.path == "/" %}class="active"{%endif%}><a href="/map_view/">Map</a></li>
             <li {% if request.path == "/report/list/"%}class="active"{%endif%}><a href="/report/list/">Reports</a></li>
             <li {% if request.path == "/center/list/"%}class="active"{%endif%}><a href="/center/list/">Centers</a></li>
             <li {% if request.path == "/mobile_report/"%}class="active"{%endif%}><a href="/mobile_report/">Location Report</a></li>
