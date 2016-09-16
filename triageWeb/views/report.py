@@ -32,24 +32,25 @@ from triageWeb.models import TriageCoord
 from triageWeb.models import TriageGeometry
 
 
-from triageWeb.forms import InjuryReportForm
 from triageWeb.forms import DiseaseReportForm
 from triageWeb.forms import StructureForm
+from triageWeb.forms import InjuryNewReportForm
 from triageWeb.forms import InjuryReportForm
+from triageWeb.forms import DiseaseNewReportForm
 from triageWeb.forms import DiseaseReportForm
 from triageWeb.forms import StructureForm
 
 @login_required
 def report(request):
-  injury_form = InjuryReportForm()
-  disease_form = DiseaseReportForm()
+  injury_form = InjuryNewReportForm()
+  disease_form = DiseaseNewReportForm()
   structure_form = StructureForm()
   if request.GET and request.GET['lng'] and request.GET['lat']:
-    injury_form = InjuryReportForm(initial={
+    injury_form = InjuryNewReportForm(initial={
         'latitude':request.GET['lat'],
         'longitude':request.GET['lng']
       })
-    disease_form = DiseaseReportForm(initial={
+    disease_form = DiseaseNewReportForm(initial={
         'latitude':request.GET['lat'],
         'longitude':request.GET['lng']
       })
@@ -79,9 +80,7 @@ def mobile_report(request):
 
 def report_create(request):
   if request.method == "POST":
-    print(request.POST['report_type'])
     if request.POST['report_type'] == "disease":
-      print("handling disease")
       form = DiseaseReportForm(request.POST)
     elif request.POST['report_type'] == "injury":
       form = InjuryReportForm(request.POST)
@@ -127,10 +126,7 @@ def report_create(request):
           initial_reporter=reporter
         )
         structure_report.save()
-        print(form.cleaned_data)
-        print("structure made")
     else:
-      print("form invalid here")
       return render(request, 'report.html', {'form':form})
   return redirect('/map_view/')
 
@@ -195,7 +191,6 @@ def report_update(request, id, report_type):
         structure_report.update(form.cleaned_data, reporter)
 
     else:
-      print("form invalid")
       return render(request, 'report.html', {'form':form})
   return redirect('/map_view/')
 
@@ -203,10 +198,10 @@ def report_list(request):
   person_list = Person.objects.all().filter(is_active=True)
   structure_list = Structure.objects.all().filter(is_active=True)
   report_list = list(chain(person_list, structure_list))
-  print(timezone.localtime(timezone.now()))
   field_list = [
     ('condition_type', "Condition"),
     ('status','Status'),
+    ('center', 'Center'),
     ('initial_reporter','Reporter'),
     ('report_time','Reported'),
     ('updater','Updater'),
@@ -224,8 +219,6 @@ def report_personnel_view(request, id):
   report_history = person_report.patienthistory.report_set.all().order_by('report_time')
 
   report_history = report_history.order_by('-report_time')
-  for report in report_history:
-    print(report)
   return render(request, 'report_view.html',
   {
     'report':person_report,
@@ -235,6 +228,7 @@ def report_personnel_view(request, id):
 
 def report_personnel_delete(request, id):
   if request.method == "POST":
+    print("deleting")
     report = Person.objects.get(pk=id)
     report.is_active = False
     report.save()

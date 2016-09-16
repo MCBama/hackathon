@@ -1,13 +1,9 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% load modelTags %}
 <!DOCTYPE html>
-<html>
-  <head>
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="{% static 'javascript/bootstrap.min.js' %}"></script>
-
-    <title>Map View</title>
+{% block title %}Map View{%endblock%}
+{% block head %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <style>
@@ -67,9 +63,8 @@
         font-size: 12px;
       }
     </style>
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-  </head>
-  <body>
+  {% endblock %}
+{% block body_block %}
     <div id="map"></div>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script>
@@ -309,7 +304,7 @@
           person_list[index]['lng'] = parseFloat('{{person.longitude}}');
           person_list[index]['condition'] = '{{person.condition_type.capitalize}}'
           person_list[index]['status'] = '{{person.status.capitalize}}';
-          person_list[index]['url'] = "{% static person.get_map_image_url %}"
+          person_list[index]['url'] = '{% static "images/"|add:person.condition.condition_type|add:"_hatch_"|add:person.get_map_image_url|add:".png" %}'
           person_list[index]['view_url'] = "/report/person/{{person.id}}/"
           person_list[index]['edit_url'] = "/report/person/{{person.id}}/edit"
           person_list[index]['report_time'] = "{{person.report_time}}"
@@ -326,13 +321,13 @@
           structure_list[index]['lng'] = parseFloat('{{structure.longitude}}');
           structure_list[index]['status'] = '{{structure.status.capitalize}}';
           {% if structure.status.lower == "ok" %}
-            structure_list[index]['url'] = "{% static 'images/green_structure.png' %}"
+            structure_list[index]['url'] = "{% static 'images/structure_hatch_green.png' %}"
           {% elif structure.status.lower == "damaged" %}
-            structure_list[index]['url'] = "{% static 'images/yellow_structure.png' %}"
+            structure_list[index]['url'] = "{% static 'images/structure_hatch_yellow.png' %}"
           {% elif structure.status.lower == "unsound" %}
-            structure_list[index]['url'] = "{% static 'images/red_structure.png' %}"
+            structure_list[index]['url'] = "{% static 'images/structure_hatch_red.png' %}"
           {% elif structure.status.lower == "destroyed" %}
-            structure_list[index]['url'] = "{% static 'images/black_structure.png' %}"
+            structure_list[index]['url'] = "{% static 'images/structure_hatch_black.png' %}"
           {% endif %}
           structure_list[index]['view_url'] = "/report/structure/{{structure.id}}/"
           structure_list[index]['edit_url'] = "/report/structure/{{structure.id}}/edit"
@@ -348,18 +343,19 @@
           var obj = object_list[idx];
           var objLatLon = {lat: obj['lat'], lng: obj['lng']};
           var url = obj['url'];
-          var width = 20;
-          var height = 20;
+          var width = 30;
+          var height = 30;
 
           var base_image_url;
           if(obj['condition'] == "Injury"){
-            base_image_url = "{% static 'images/icon_injury.jpg' %}"
+            base_image_url = "{% static 'images/injury_white.png' %}"
           }
           else if(obj['condition']){
-            base_image_url = "{% static 'images/icon_disease.jpg' %}"
+            base_image_url = "{% static 'images/disease_white.png' %}"
           }
           else {
-            base_image_url = url
+            base_image_url = "{% static 'images/building_base.png' %}"
+            console.log(base_image_url)
           }
           var base_image = {
             url: base_image_url,
@@ -375,21 +371,19 @@
 
           // add overlay image marker
           var overlay_image_url = url;
-          if(obj['condition']){
-            console.log(url)
-            var overlay_image = {
-              url: overlay_image_url,
-              origin: new google.maps.Point(0, 0),
-              scaledSize: new google.maps.Size(width, height)
-            }
-            var overlay_marker = new google.maps.Marker({
-              position: objLatLon,
-              map: map,
-              icon: overlay_image,
-              zIndex:999999
-            });
-            overlay_marker.setOpacity(0.8);
+          console.log(url)
+          var overlay_image = {
+            url: overlay_image_url,
+            origin: new google.maps.Point(0, 0),
+            scaledSize: new google.maps.Size(width, height)
           }
+          var overlay_marker = new google.maps.Marker({
+            position: objLatLon,
+            map: map,
+            icon: overlay_image,
+            zIndex:999999
+          });
+          overlay_marker.setOpacity(0.8);
 
           var contentString = obj['tooltip'];
 
@@ -400,10 +394,8 @@
           addInfoWindow(marker, infowindow);
 
           markerList.push(marker);
-          if(obj['condition']){
-            markerList.push(overlay_marker)
-            addInfoWindow(overlay_marker, infowindow);
-          }
+          markerList.push(overlay_marker)
+          addInfoWindow(overlay_marker, infowindow);
         }
          readCenterList();
       }
@@ -422,13 +414,15 @@
             'lat':parseFloat("{{center.properties.latitude}}"),
             'lng':parseFloat("{{center.properties.longitude}}")
           }
-          var center = {'properties':{
+          var center = {
+            'id':"{{center.id}}",
+            'properties':{
             'mapText':"{{center.name}}",
             'status':"{{center.properties.status}}",
             'id':"{{center.center_id}}",
             'green':"{{center.properties.green}}",
             'yellow':"{{center.properties.yellow}}",
-            'red':"{{center.properties.red}}"
+            'red':"{{center.properties.red}}",
           }}
           addCenterMarker(centerLatLng, center)
         {% endfor %}
@@ -452,7 +446,8 @@
           "Id: <strong>" + center.properties.id + "</strong><br/>" +
           "Green: " + center.properties.green + "<br/>" +
           "Yellow: " + center.properties.yellow + "<br/>" +
-          "Red: " + center.properties.red + "<br/>"
+          "Red: " + center.properties.red + "<br/>"+
+          "<a href='/center/"+center.id+"'>View</a><br/>"
           ;
 
         var infowindow = new google.maps.InfoWindow({
@@ -486,35 +481,4 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCML1Iio5WX2UfElfnG2JkPOLyBaHd0Gxs&callback=initMap"
     async defer></script>
-                   
-                   
-    
-<nav class="navbar navbar-inverse navbar-mapfix">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Mobile Damage Assessment</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-            <li class="active"><a href="/map_view/">Map</a></li>
-            <li><a href="/report/list/">Reports</a></li>
-            <li><a href="/mobile_report/">Location Report</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <!--<div class="main_buttons">
-      <h1>Mobile Damage Assessment</h1>
-      <span class="main_button_container">
-        <a id="current_local_report" href="/mobile_report/" class="button">New Report at Current Location</a>
-        <a id="list_report" href="/report/list" class="button">List Reports</a>
-      </span>
-    </div>-->
-  </body>
-</html>
+{% endblock %}

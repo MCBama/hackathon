@@ -21,6 +21,7 @@ import triageWeb.views.map as maps
 import triageWeb.views.helper_views as helpers
 import triageWeb.views.login as login
 import triageWeb.views.report as report
+import triageWeb.views.center as center
 
 urlpatterns = [
     url(r'^$', maps.map_view),
@@ -41,5 +42,8 @@ urlpatterns = [
     url(r'^report/structure/(?P<id>\d+)/delete$', report.report_structure_delete),
     url(r'^(?P<state>\w+)/(?P<lat>-?\d+\.\d+)/(?P<lon>-?\d+\.\d+)', report.mobile_post_report),
     url(r'^parse_json/', helpers.parse_json),
-    url(r'^parse_hospital_data/', helpers.view_hospital_data)
+    url(r'^parse_hospital_data/', helpers.view_hospital_data),
+
+    url(r'^center/(?P<id>\d+)/', center.view),
+    url(r'^center/list/', center.list),
 ]

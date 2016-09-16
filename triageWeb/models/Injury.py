@@ -15,11 +15,11 @@ class Injury(models.Model):
       (OK, 'Ok'),
   )
 
-  image_urls = {
-    'deceased': 'images/trans_hatch_black.png',
-    'critical': 'images/trans_hatch_red.png',
-    'injured': 'images/trans_hatch_yellow.png',
-    'ok': 'images/trans_hatch_green.png',
+  image_colors = {
+    'deceased': 'black',
+    'critical': 'red',
+    'injured': 'yellow',
+    'ok': 'green',
   }
 
   status = models.CharField(choices = STATUS, default = OK, max_length=20)
@@ -27,7 +27,7 @@ class Injury(models.Model):
   condition = models.OneToOneField(Condition)
 
   def map_image_url(self):
-    return self.image_urls[self.status]
+    return self.image_colors[self.status]
 
   def __str__(self):
     return self.condition.__str__();

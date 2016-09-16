@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}Center List {% endblock %}
+
+{% block body_block %}
+  <div class="basic_page">
+    <div class="container-fluid">
+      <div class="row">
+        <table class="table-striped table-hover table-bordered centered-table">
+          <thead>
+            <th>Center ID</th>
+            <th>Center Name</th>
+            <th>Verified</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Patient<br/>Count</th>
+            <th>Options</th>
+          </thead>
+          <tbody>
+            {% for center in center_list %}
+            <tr>
+              <td>{{center.center_id}}</td>
+              <td>{{center.name}}</td>
+              <td>{{center.properties.verified}}</td>
+              <td>{{center.properties.latitude|floatformat:5}}</td>
+              <td>{{center.properties.longitude|floatformat:5}}</td>
+              <td>{{center.patient_count}}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a type="button" class="btn btn-default table-button" href="/center/{{center.id}}" method="GET">View</a>
+                </div>
+             </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

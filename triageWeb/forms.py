@@ -14,30 +14,43 @@ class StructureForm(forms.ModelForm):
       'status'
     ]
 
-class DiseaseReportForm(forms.ModelForm):
+class DiseaseNewReportForm(forms.ModelForm):
   def __init__(self, *args, **kwargs):
-    super(DiseaseReportForm, self).__init__(*args, **kwargs)
-    self.fields['center'].required = False
+    super(DiseaseNewReportForm, self).__init__(*args, **kwargs)
     self.fields['status'] = forms.ChoiceField(Disease.STATUS, initial="cleared")
     self.fields['disease_name'] = forms.ChoiceField(Disease.DISEASES, initial="ebola")
   class Meta:
     model = Person
     fields=[
       'latitude',
-      'longitude',
-      'center'
+      'longitude'
     ]
 
-class InjuryReportForm(forms.ModelForm):
+class DiseaseReportForm(DiseaseNewReportForm):
   def __init__(self, *args, **kwargs):
-    super(InjuryReportForm, self).__init__(*args, **kwargs)
+    super(DiseaseReportForm, self).__init__(*args, **kwargs)
     self.fields['center'].required = False
+
+  class Meta(DiseaseNewReportForm.Meta):
+    DiseaseNewReportForm.Meta.fields.append('center')
+
+class InjuryNewReportForm(forms.ModelForm):
+  def __init__(self, *args, **kwargs):
+    super(InjuryNewReportForm, self).__init__(*args, **kwargs)
     self.fields['status'] = forms.ChoiceField(Injury.STATUS, initial="ok")
 
   class Meta:
     model = Person
     fields=[
       'latitude',
-      'longitude',
-      'center'
+      'longitude'
     ]
+
+class InjuryReportForm(InjuryNewReportForm):
+  def __init__(self, *args, **kwargs):
+    super(InjuryReportForm, self).__init__(*args, **kwargs)
+    self.fields['center'].required = False
+
+  class Meta(InjuryNewReportForm.Meta):
+    model = Person
+    InjuryNewReportForm.Meta.fields.append('center')

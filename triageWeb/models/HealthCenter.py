@@ -12,6 +12,9 @@ class HealthCenter(models.Model):
 
   properties = models.OneToOneField(CenterProperties)
 
+  def patient_count(self):
+    return self.person_set.filter(is_active=True).count()
+
   def update_counts(self, queryset):
     self.properties.update_counts(queryset)
 

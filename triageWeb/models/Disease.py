@@ -20,11 +20,11 @@ class Disease(models.Model):
     (EBOLA, 'Ebola'),
   )
 
-  image_urls = {
-    'deceased': 'images/trans_hatch_black.png',
-    'critical': 'images/trans_hatch_red.png',
-    'stable': 'images/trans_hatch_yellow.png',
-    'cleared': 'images/trans_hatch_green.png',
+  image_colors = {
+    'deceased': 'black',
+    'critical': 'red',
+    'stable': 'yellow',
+    'cleared': 'green',
   }
 
   disease_name = models.CharField(choices = DISEASES, default=EBOLA, max_length=20)
@@ -33,4 +33,4 @@ class Disease(models.Model):
   condition = models.OneToOneField(Condition)
 
   def map_image_url(self):
-    return self.image_urls[self.status]
+    return self.image_colors[self.status]
