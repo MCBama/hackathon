@@ -5,7 +5,11 @@
 {% block body_block %}
   <div class="basic_page">
 
+      {% if "update" in submit_url %}
+      <h1>Update Report</h1>
+      {% else %}
       <h1>New Report</h1>
+      {% endif %}
       <div class="row">
         <div class="col-md-offset-1 col-md-5">
           <ul class="nav nav-tabs" role="tablist">
@@ -39,11 +43,13 @@
               <form method="POST" action="{{submit_url}}">{% csrf_token %}
                 {{ injury_form.as_p }}
                 <input type="hidden" name="report_type" value="injury"/>
+                <label>&nbsp;</label><button type="submit" class="btn btn-primary">
                 {% if "update" in submit_url %}
-                <label>&nbsp;</label><input type="submit" value="Modify Report"/>
+                  Modify Report
                 {% else %}
-                <label>&nbsp;</label><input type="submit" value="Create Report"/>
+                Create Report
                 {% endif %}
+                </button>
               </form>
             </div>
             <div id="disease_tab_pane" role="tabpanel" class="tab-pane
@@ -53,11 +59,13 @@
               <form method="POST" action="{{submit_url}}">{% csrf_token %}
                 {{ disease_form.as_p }}
                 <input type="hidden" name="report_type" value="disease"/>
+                <label>&nbsp;</label><button type="submit" class="btn btn-primary">
                 {% if "update" in submit_url %}
-                <label>&nbsp;</label><input type="submit" value="Modify Report"/>
+                  Modify Report
                 {% else %}
-                <label>&nbsp;</label><input type="submit" value="Create Report"/>
+                  Create Report
                 {% endif %}
+                </button>
               </form>
             </div>
             <div id="structure_tab_pane" role="tabpanel" class="tab-pane
@@ -67,11 +75,13 @@
               <form method="POST" action="{{submit_url}}">{% csrf_token %}
                 {{ structure_form.as_p }}
                 <input type="hidden" name="report_type" value="structure"/>
+                <label>&nbsp;</label><button type="submit" class="btn btn-primary">
                 {% if "update" in submit_url %}
-                <label>&nbsp;</label><input type="submit" value="Modify Report"/>
+                  Modify Report
                 {% else %}
-                <label>&nbsp;</label><input type="submit" value="Create Report"/>
+                  Create Report
                 {% endif %}
+                </button>
               </form>
             </div>
           </div>
