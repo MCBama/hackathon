@@ -22,10 +22,11 @@
         {% if type != "structure" %}
         <div class="row">
           <h1>Patient History</h1>
-          <table class="table-striped centered-table table-fullwidth">
+          <table class="table-striped centered-table">
             <thead>
               <th>Latitude</th>
               <th>Longitude</th>
+              <th>Status</th>
               <th>Center</th>
               <th>Reporter</th>
               <th>Report Time</th>
@@ -35,6 +36,7 @@
               <tr>
                 <td>{{report.latitude|floatformat:5}}</td>
                 <td>{{report.longitude|floatformat:5}}</td>
+                <td>{{report.patient_status.capitalize}}</td>
                 <td>{{report.center}}</td>
                 <td>{{report.reporter}}</td>
                 <td>{{report.report_time|date:"D d M Y H:i"}}</td>

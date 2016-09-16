@@ -23,7 +23,6 @@ class Person(models.Model):
   center = models.ForeignKey(HealthCenter, null=True)
 
   def update(self, form_data, reporter):
-    self.condition.set_status(form_data['status'])
     self.latitude=form_data['latitude']
     self.longitude=form_data['longitude']
     self.updater=reporter
@@ -34,7 +33,8 @@ class Person(models.Model):
       self.latitude = self.center.properties.latitude
       self.longitude = self.center.properties.longitude
     self.save()
-
+    self.condition.set_status(form_data['status'])
+    
     if self.center is not None:
       self.update_center_count()
       if previous_center is not None:
@@ -45,6 +45,9 @@ class Person(models.Model):
 
   def condition_type(self):
     return self.condition.get_condition()
+
+  def condition_generic_type(self):
+    return self.condition.condition_type()
 
   status = property(status)
   condition_type = property(condition_type)
